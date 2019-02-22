@@ -40,6 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementations\ClientServiceList.cs" />
+    <Compile Include="Implementations\ComponentServiceList.cs" />
+    <Compile Include="Implementations\MainServiceList.cs" />
+    <Compile Include="Implementations\ProductComponentServiceList.cs" />
+    <Compile Include="Implementations\ProductServiceList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataListSingleton.cs" />
   </ItemGroup>
