@@ -24,11 +24,11 @@ namespace ZakusochnayaView
         public static IUnityContainer BuildUnityContainer()
         {
             var currentContainer = new UnityContainer();
-            currentContainer.RegisterType<IClientService, ClientServiceList>(new
+            currentContainer.RegisterType<IPokupatelService, PokupatelServiceList>(new
             HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IComponentService, ComponentServiceList>(new
+            currentContainer.RegisterType<IElementService, ElementServiceList>(new
             HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IProductService, ProductServiceList>(new
+            currentContainer.RegisterType<IOutputService, OutputServiceList>(new
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IMainService, MainServiceList>(new
             HierarchicalLifetimeManager());

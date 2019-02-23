@@ -6,18 +6,18 @@ namespace ZakusochnayaServiceImplementList
     class DataListSingleton
     {
         private static DataListSingleton instance;
-        public List<Client> Clients { get; set; }
-        public List<Component> Components { get; set; }
-        public List<Order> Orders { get; set; }
-        public List<Product> Products { get; set; }
-        public List<ProductComponent> ProductComponents { get; set; }
+        public List<Pokupatel> Pokupatels { get; set; }
+        public List<Element> Elements { get; set; }
+        public List<Zakaz> Zakazs { get; set; }
+        public List<Output> Outputs { get; set; }
+        public List<OutputElement> OutputElements { get; set; }
         private DataListSingleton()
         {
-            Clients = new List<Client>();
-            Components = new List<Component>();
-            Orders = new List<Order>();
-            Products = new List<Product>();
-            ProductComponents = new List<ProductComponent>();
+            Pokupatels = new List<Pokupatel>();
+            Elements = new List<Element>();
+            Zakazs = new List<Zakaz>();
+            Outputs = new List<Output>();
+            OutputElements = new List<OutputElement>();
         }
         public static DataListSingleton GetInstance()
         {

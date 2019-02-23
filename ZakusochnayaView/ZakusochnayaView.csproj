@@ -62,23 +62,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormClient.cs">
+    <Compile Include="FormPokupatel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormClient.Designer.cs">
-      <DependentUpon>FormClient.cs</DependentUpon>
+    <Compile Include="FormPokupatel.Designer.cs">
+      <DependentUpon>FormPokupatel.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormClients.cs">
+    <Compile Include="FormPokupatels.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormClients.Designer.cs">
-      <DependentUpon>FormClients.cs</DependentUpon>
+    <Compile Include="FormPokupatels.Designer.cs">
+      <DependentUpon>FormPokupatels.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormComponents.cs">
+    <Compile Include="FormElement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormComponents.Designer.cs">
-      <DependentUpon>FormComponents.cs</DependentUpon>
+    <Compile Include="FormElement.Designer.cs">
+      <DependentUpon>FormElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormElements.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormElements.Designer.cs">
+      <DependentUpon>FormElements.cs</DependentUpon>
     </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
@@ -86,46 +92,58 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormCreateOrder.cs">
+    <Compile Include="FormCreateZakaz.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormCreateOrder.Designer.cs">
-      <DependentUpon>FormCreateOrder.cs</DependentUpon>
+    <Compile Include="FormCreateZakaz.Designer.cs">
+      <DependentUpon>FormCreateZakaz.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormProduct.cs">
+    <Compile Include="FormOutput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormProduct.Designer.cs">
-      <DependentUpon>FormProduct.cs</DependentUpon>
+    <Compile Include="FormOutput.Designer.cs">
+      <DependentUpon>FormOutput.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormProductComponent.cs">
+    <Compile Include="FormOutputElement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormProductComponent.Designer.cs">
-      <DependentUpon>FormProductComponent.cs</DependentUpon>
+    <Compile Include="FormOutputElement.Designer.cs">
+      <DependentUpon>FormOutputElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormOutputs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOutputs.Designer.cs">
+      <DependentUpon>FormOutputs.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormClient.resx">
-      <DependentUpon>FormClient.cs</DependentUpon>
+    <EmbeddedResource Include="FormPokupatel.resx">
+      <DependentUpon>FormPokupatel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormClients.resx">
-      <DependentUpon>FormClients.cs</DependentUpon>
+    <EmbeddedResource Include="FormPokupatels.resx">
+      <DependentUpon>FormPokupatels.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormComponents.resx">
-      <DependentUpon>FormComponents.cs</DependentUpon>
+    <EmbeddedResource Include="FormElement.resx">
+      <DependentUpon>FormElement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormElements.resx">
+      <DependentUpon>FormElements.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormCreateOrder.resx">
-      <DependentUpon>FormCreateOrder.cs</DependentUpon>
+    <EmbeddedResource Include="FormCreateZakaz.resx">
+      <DependentUpon>FormCreateZakaz.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormProduct.resx">
-      <DependentUpon>FormProduct.cs</DependentUpon>
+    <EmbeddedResource Include="FormOutput.resx">
+      <DependentUpon>FormOutput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormProductComponent.resx">
-      <DependentUpon>FormProductComponent.cs</DependentUpon>
+    <EmbeddedResource Include="FormOutputElement.resx">
+      <DependentUpon>FormOutputElement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOutputs.resx">
+      <DependentUpon>FormOutputs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

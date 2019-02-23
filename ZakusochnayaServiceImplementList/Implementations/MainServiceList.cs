@@ -14,72 +14,72 @@ namespace ZakusochnayaServiceImplementList.Implementations
         {
             source = DataListSingleton.GetInstance();
         }
-        public List<OrderViewModel> GetList()
+        public List<ZakazViewModel> GetList()
         {
-            List<OrderViewModel> result = new List<OrderViewModel>();
-            for (int i = 0; i < source.Orders.Count; ++i)
+            List<ZakazViewModel> result = new List<ZakazViewModel>();
+            for (int i = 0; i < source.Zakazs.Count; ++i)
             {
-                string clientFIO = string.Empty;
-                for (int j = 0; j < source.Clients.Count; ++j)
+                string pokuptelFIO = string.Empty;
+                for (int j = 0; j < source.Pokupatels.Count; ++j)
                 {
-                    if (source.Clients[j].Id == source.Orders[i].ClientId)
+                    if (source.Pokupatels[j].Id == source.Zakazs[i].PokupatelId)
                     {
-                        clientFIO = source.Clients[j].ClientFIO;
+                        pokuptelFIO = source.Pokupatels[j].PokupatelFIO;
                         break;
                     }
                 }
-                string productName = string.Empty;
-                for (int j = 0; j < source.Products.Count; ++j)
+                string OutputName = string.Empty;
+                for (int j = 0; j < source.Outputs.Count; ++j)
                 {
-                    if (source.Products[j].Id == source.Orders[i].ProductId)
+                    if (source.Outputs[j].Id == source.Zakazs[i].OutputId)
                     {
-                        productName = source.Products[j].ProductName;
+                        OutputName = source.Outputs[j].OutputName;
                         break;
                     }
                 }
-                result.Add(new OrderViewModel
+                result.Add(new ZakazViewModel
                 {
-                    Id = source.Orders[i].Id,
-                    ClientId = source.Orders[i].ClientId,
-                    ClientFIO = clientFIO,
-                    ProductId = source.Orders[i].ProductId,
-                    ProductName = productName,
-                    Count = source.Orders[i].Count,
-                    Sum = source.Orders[i].Sum,
-                    DateCreate = source.Orders[i].DateCreate.ToLongDateString(),
-                    DateImplement = source.Orders[i].DateImplement?.ToLongDateString(),
-                    Status = source.Orders[i].Status.ToString()
+                    Id = source.Zakazs[i].Id,
+                    PokupatelId = source.Zakazs[i].PokupatelId,
+                    PokupatelFIO = pokuptelFIO,
+                    OutputId = source.Zakazs[i].OutputId,
+                    OutputName = OutputName,
+                    Number = source.Zakazs[i].Number,
+                    Summa = source.Zakazs[i].Summa,
+                    DateCreate = source.Zakazs[i].DateCreate.ToLongDateString(),
+                    DateImplement = source.Zakazs[i].DateImplement?.ToLongDateString(),
+                    Status = source.Zakazs[i].Status.ToString()
                 });
             }
             return result;
         }
-        public void CreateOrder(OrderBindingModel model)
+        public void CreateOrder(ZakazBindingModel model)
         {
             int maxId = 0;
-            for (int i = 0; i < source.Orders.Count; ++i)
+            for (int i = 0; i < source.Zakazs.Count; ++i)
             {
-                if (source.Orders[i].Id > maxId)
+                if (source.Zakazs[i].Id > maxId)
                 {
-                    maxId = source.Clients[i].Id;
+                    maxId = source.Pokupatels[i].Id;
                 }
             }
-            source.Orders.Add(new Order
+            source.Zakazs.Add(new Zakaz
             {
                 Id = maxId + 1,
-                ClientId = model.ClientId,
-                ProductId = model.ProductId,
+                PokupatelId = model.PokupatelId,
+                OutputId = model.OutputId,
                 DateCreate = DateTime.Now,
-                Count = model.Count,
-                Sum = model.Sum,
-                Status = OrderStatus.Принят
+                Number = model.Number,
+                Summa = model.Summa,
+                Status = ZakazStatus.Принят
             });
         }
-        public void TakeOrderInWork(OrderBindingModel model)
+        public void TakeOrderInWork(ZakazBindingModel model)
         {
             int index = -1;
-            for (int i = 0; i < source.Orders.Count; ++i)
+            for (int i = 0; i < source.Zakazs.Count; ++i)
             {
-                if (source.Orders[i].Id == model.Id)
+                if (source.Zakazs[i].Id == model.Id)
                 {
                     index = i;
                     break;
@@ -89,19 +89,19 @@ namespace ZakusochnayaServiceImplementList.Implementations
             {
                 throw new Exception("Элемент не найден");
             }
-            if (source.Orders[index].Status != OrderStatus.Принят)
+            if (source.Zakazs[index].Status != ZakazStatus.Принят)
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
-            source.Orders[index].DateImplement = DateTime.Now;
-            source.Orders[index].Status = OrderStatus.Выполняется;
+            source.Zakazs[index].DateImplement = DateTime.Now;
+            source.Zakazs[index].Status = ZakazStatus.Выполняется;
         }
-        public void FinishOrder(OrderBindingModel model)
+        public void FinishOrder(ZakazBindingModel model)
         {
             int index = -1;
-            for (int i = 0; i < source.Orders.Count; ++i)
+            for (int i = 0; i < source.Zakazs.Count; ++i)
             {
-                if (source.Clients[i].Id == model.Id)
+                if (source.Pokupatels[i].Id == model.Id)
                 {
                     index = i;
                     break;
@@ -111,18 +111,18 @@ namespace ZakusochnayaServiceImplementList.Implementations
             {
                 throw new Exception("Элемент не найден");
             }
-            if (source.Orders[index].Status != OrderStatus.Выполняется)
+            if (source.Zakazs[index].Status != ZakazStatus.Выполняется)
             {
                 throw new Exception("Заказ не в статусе \"Выполняется\"");
             }
-            source.Orders[index].Status = OrderStatus.Готов;
+            source.Zakazs[index].Status = ZakazStatus.Готов;
         }
-        public void PayOrder(OrderBindingModel model)
+        public void PayOrder(ZakazBindingModel model)
         {
             int index = -1;
-            for (int i = 0; i < source.Orders.Count; ++i)
+            for (int i = 0; i < source.Zakazs.Count; ++i)
             {
-                if (source.Clients[i].Id == model.Id)
+                if (source.Pokupatels[i].Id == model.Id)
                 {
                     index = i;
                     break;
@@ -132,11 +132,11 @@ namespace ZakusochnayaServiceImplementList.Implementations
             {
                 throw new Exception("Элемент не найден");
             }
-            if (source.Orders[index].Status != OrderStatus.Готов)
+            if (source.Zakazs[index].Status != ZakazStatus.Готов)
             {
                 throw new Exception("Заказ не в статусе \"Готов\"");
             }
-            source.Orders[index].Status = OrderStatus.Оплачен;
+            source.Zakazs[index].Status = ZakazStatus.Оплачен;
         }
     }
 }

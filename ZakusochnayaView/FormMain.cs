@@ -24,7 +24,7 @@ namespace ZakusochnayaView
         {
             try
             {
-                List<OrderViewModel> list = service.GetList();
+                List<ZakazViewModel> list = service.GetList();
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -44,22 +44,22 @@ namespace ZakusochnayaView
         }
         private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormClients>();
+            var form = Container.Resolve<FormPokupatels>();
             form.ShowDialog();
         }
         private void компонентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormComponents>();
+            var form = Container.Resolve<FormElements>();
             form.ShowDialog();
         }
         private void продуктыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormProduct>();
+            var form = Container.Resolve<FormOutputs>();
             form.ShowDialog();
         }
         private void buttonCreateOrder_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormCreateOrder>();
+            var form = Container.Resolve<FormCreateZakaz>();
             form.ShowDialog();
             LoadData();
         }
@@ -71,7 +71,7 @@ namespace ZakusochnayaView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    service.TakeOrderInWork(new OrderBindingModel { Id = id });
+                    service.TakeOrderInWork(new ZakazBindingModel { Id = id });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -89,7 +89,7 @@ namespace ZakusochnayaView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    service.FinishOrder(new OrderBindingModel { Id = id });
+                    service.FinishOrder(new ZakazBindingModel { Id = id });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -107,7 +107,7 @@ namespace ZakusochnayaView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    service.PayOrder(new OrderBindingModel { Id = id });
+                    service.PayOrder(new ZakazBindingModel { Id = id });
                     LoadData();
                 }
                 catch (Exception ex)
