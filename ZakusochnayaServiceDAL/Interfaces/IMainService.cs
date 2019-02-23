@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZakusochnayaServiceDAL.BindingModel;
 using ZakusochnayaServiceDAL.BindingModels;
 using ZakusochnayaServiceDAL.ViewModels;
 
@@ -15,5 +16,6 @@ namespace ZakusochnayaServiceDAL.Interfaces
         void TakeOrderInWork(ZakazBindingModel model);
         void FinishOrder(ZakazBindingModel model);
         void PayOrder(ZakazBindingModel model);
+        void PutComponentOnStock(SkladElementBindingModel model);
     }
 }

@@ -11,6 +11,8 @@ namespace ZakusochnayaServiceImplementList
         public List<Zakaz> Zakazs { get; set; }
         public List<Output> Outputs { get; set; }
         public List<OutputElement> OutputElements { get; set; }
+        public List<Sklad> Sklads { get; set; }
+        public List<SkladElement> SkladElements { get; set; }
         private DataListSingleton()
         {
             Pokupatels = new List<Pokupatel>();
@@ -18,6 +20,8 @@ namespace ZakusochnayaServiceImplementList
             Zakazs = new List<Zakaz>();
             Outputs = new List<Output>();
             OutputElements = new List<OutputElement>();
+            Sklads = new List<Sklad>();
+            SkladElements = new List<SkladElement>();
         }
         public static DataListSingleton GetInstance()
         {
