@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
+using ZakusochnayaServiceDAL.BindingModel;
 using ZakusochnayaServiceDAL.Interfaces;
 using ZakusochnayaServiceDAL.ViewModel;
 
@@ -35,7 +29,7 @@ namespace ZakusochnayaView
                     if (view != null)
                     {
                         textBoxName.Text = view.SkladName;
-                        dataGridView.DataSource = view.StockComponents;
+                        dataGridView.DataSource = view.SkladElements;
                         dataGridView.Columns[0].Visible = false;
                         dataGridView.Columns[1].Visible = false;
                         dataGridView.Columns[2].Visible = false;
@@ -62,17 +56,17 @@ namespace ZakusochnayaView
             {
                 if (id.HasValue)
                 {
-                    service.UpdElement(new StockBindingModel
+                    service.UpdElement(new SkladBindingModel
                     {
                         Id = id.Value,
-                        StockName = textBoxName.Text
+                        SkladName = textBoxName.Text
                     });
                 }
                 else
                 {
-                    service.AddElement(new StockBindingModel
+                    service.AddElement(new SkladBindingModel
                     {
-                        StockName = textBoxName.Text
+                        SkladName = textBoxName.Text
                     });
                 }
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",

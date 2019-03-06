@@ -116,6 +116,12 @@
     <Compile Include="FormOutputs.Designer.cs">
       <DependentUpon>FormOutputs.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormPutOnSklad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPutOnSklad.Designer.cs">
+      <DependentUpon>FormPutOnSklad.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSklad.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormOutputs.resx">
       <DependentUpon>FormOutputs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPutOnSklad.resx">
+      <DependentUpon>FormPutOnSklad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSklad.resx">
       <DependentUpon>FormSklad.cs</DependentUpon>
