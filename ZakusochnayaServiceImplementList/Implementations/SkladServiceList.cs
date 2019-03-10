@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ZakusochnayaModel;
+using ZakusochnayaServiceDAL;
 using ZakusochnayaServiceDAL.BindingModel;
 using ZakusochnayaServiceDAL.Interfaces;
 using ZakusochnayaServiceDAL.ViewModel;
 
 namespace ZakusochnayaServiceImplementList.Implementations
 {
-    class SkladServiceList : ISkladService
+    public class SkladServiceList : ISkladService
     {
         private DataListSingleton source;
         public SkladServiceList()

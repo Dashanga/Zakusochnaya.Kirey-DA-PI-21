@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Unity;
+using ZakusochnayaServiceDAL;
 using ZakusochnayaServiceDAL.BindingModel;
 using ZakusochnayaServiceDAL.Interfaces;
 using ZakusochnayaServiceDAL.ViewModel;

@@ -57,13 +57,12 @@
             // 
             // buttonUpd
             // 
-            this.buttonUpd.Location = new System.Drawing.Point(356, 61);
+            this.buttonUpd.Location = new System.Drawing.Point(355, 59);
             this.buttonUpd.Name = "buttonUpd";
             this.buttonUpd.Size = new System.Drawing.Size(75, 23);
-            this.buttonUpd.TabIndex = 2;
+            this.buttonUpd.TabIndex = 5;
             this.buttonUpd.Text = "Изменить";
-            this.buttonUpd.UseVisualStyleBackColor = true;
-            this.buttonUpd.Click += new System.EventHandler(this.buttonUpd_Click);
+            this.buttonUpd.Click += new System.EventHandler(this.buttonUpd_Click_1);
             // 
             // buttonDel
             // 
@@ -97,6 +96,7 @@
             this.Controls.Add(this.dataGridView);
             this.Name = "FormSklads";
             this.Text = "Склады";
+            this.Load += new System.EventHandler(this.FormSklads_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

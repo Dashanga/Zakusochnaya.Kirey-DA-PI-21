@@ -87,6 +87,7 @@
             // 
             // comboBoxStock
             // 
+            this.comboBoxStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxStock.FormattingEnabled = true;
             this.comboBoxStock.Location = new System.Drawing.Point(96, 13);
             this.comboBoxStock.Name = "comboBoxStock";
@@ -95,6 +96,7 @@
             // 
             // comboBoxComponent
             // 
+            this.comboBoxComponent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxComponent.FormattingEnabled = true;
             this.comboBoxComponent.Location = new System.Drawing.Point(96, 45);
             this.comboBoxComponent.Name = "comboBoxComponent";
@@ -123,6 +125,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FormPutOnSklad";
             this.Text = "Пополнение склада";
+            this.Load += new System.EventHandler(this.FormPutOnSklad_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

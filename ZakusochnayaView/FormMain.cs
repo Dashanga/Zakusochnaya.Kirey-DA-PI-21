@@ -57,6 +57,18 @@ namespace ZakusochnayaView
             var form = Container.Resolve<FormOutputs>();
             form.ShowDialog();
         }
+        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Container.AddExtension(new Diagnostic());
+            var form = Container.Resolve<FormSklads>();
+            form.ShowDialog();
+        }
+        private void пополнитьСкладToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Container.AddExtension(new Diagnostic());
+            var form = Container.Resolve<FormPutOnSklad>();
+            form.ShowDialog();
+        }
         private void buttonCreateOrder_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormCreateZakaz>();
@@ -121,12 +133,6 @@ namespace ZakusochnayaView
         private void buttonRef_Click_1(object sender, EventArgs e)
         {
             LoadData();
-        }
-
-        private void складыToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormSklads>();
-            form.ShowDialog();
         }
     }
 }

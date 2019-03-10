@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Unity;
 using ZakusochnayaServiceDAL.ViewModel;
 using ZakusochnayaServiceDAL.BindingModel;
+using ZakusochnayaServiceDAL;
 
 namespace ZakusochnayaView
 {
