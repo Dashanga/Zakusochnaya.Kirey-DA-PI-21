@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ZakusochnayaModel
 {
@@ -19,5 +15,7 @@ namespace ZakusochnayaModel
         public ZakazStatus Status { get; set; }
         public DateTime DateCreate { get; set; }
         public DateTime? DateImplement { get; set; }
+        public virtual Pokupatel Pokupatel { get; set; }
+        public virtual Output Output { get; set; }
     }
 }
