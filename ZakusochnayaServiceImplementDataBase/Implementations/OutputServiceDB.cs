@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace ZakusochnayaServiceImplementDataBase.Implementations
 {
-    class OutputServiceDB : IOutputService
+    public class OutputServiceDB : IOutputService
     {
         private ZakusochnayaDbContext context;
         public OutputServiceDB(ZakusochnayaDbContext context)

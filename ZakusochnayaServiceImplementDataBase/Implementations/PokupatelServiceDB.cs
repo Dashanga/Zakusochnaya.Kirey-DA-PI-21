@@ -8,7 +8,7 @@ using ZakusochnayaServiceDAL.BindingModel;
 
 namespace ZakusochnayaServiceImplementDataBase
 {
-    class PokupatelServiceDB : IPokupatelService
+    public class PokupatelServiceDB : IPokupatelService
     {
         private ZakusochnayaDbContext context;
         public PokupatelServiceDB(ZakusochnayaDbContext context)
