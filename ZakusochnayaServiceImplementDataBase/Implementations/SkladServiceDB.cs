@@ -21,7 +21,18 @@ namespace ZakusochnayaServiceImplementDataBase.Implementations
             SkladViewModel
             {
                 Id = rec.Id,
-                SkladName = rec.SkladName
+                SkladName = rec.SkladName,
+                SkladElements = context.SkladElements
+            .Where(recPC => recPC.SkladId == rec.Id)
+            .Select(recPC => new SkladElementViewModel
+            {
+                Id = recPC.Id,
+                SkladId = recPC.SkladId,
+                ElementId = recPC.ElementId,
+                ElementName = recPC.Element.ElementName,
+                Number = recPC.Number
+            })
+            .ToList()
             })
             .ToList();
             return result;
@@ -34,7 +45,18 @@ namespace ZakusochnayaServiceImplementDataBase.Implementations
                 return new SkladViewModel
                 {
                     Id = element.Id,
-                    SkladName = element.SkladName
+                    SkladName = element.SkladName,
+                     SkladElements = context.SkladElements
+                    .Where(recPC => recPC.SkladId == element.Id)
+                    .Select(recPC => new SkladElementViewModel
+                    {
+                        Id = recPC.Id,
+                        SkladId = recPC.SkladId,
+                        ElementId = recPC.ElementId,
+                        ElementName = recPC.Element.ElementName,
+                        Number = recPC.Number
+                    })
+                    .ToList()
                 };
             }
             throw new Exception("Элемент не найден");
