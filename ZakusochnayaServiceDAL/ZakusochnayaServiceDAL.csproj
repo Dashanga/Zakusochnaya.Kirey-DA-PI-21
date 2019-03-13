@@ -40,12 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingModel\OtchetBindingModel.cs" />
     <Compile Include="BindingModel\PokupatelBindingModel.cs" />
     <Compile Include="BindingModel\ElementBindingModel.cs" />
     <Compile Include="BindingModel\SkladBindingModel.cs" />
     <Compile Include="BindingModel\SkladElementBindingModel.cs" />
     <Compile Include="BindingModel\ZakazStatusBindingModel.cs" />
     <Compile Include="BindingModel\OutputElementBindingModel.cs" />
+    <Compile Include="Interfaces\IOtchetService.cs" />
     <Compile Include="Interfaces\IPokupatelService.cs" />
     <Compile Include="BindingModel\ZakazBindingModel.cs" />
     <Compile Include="Interfaces\IElementService.cs" />
@@ -55,7 +57,9 @@
     <Compile Include="Interfaces\ISkladService.cs" />
     <Compile Include="ViewModel\PokupatelViewModel.cs" />
     <Compile Include="ViewModel\ElementViewModel.cs" />
+    <Compile Include="ViewModel\PokupatelZakazsModel.cs" />
     <Compile Include="ViewModel\SkladElementViewModel.cs" />
+    <Compile Include="ViewModel\SkladsLoadViewModel.cs" />
     <Compile Include="ViewModel\SkladViewModel.cs" />
     <Compile Include="ViewModel\ZakazViewModel.cs" />
     <Compile Include="BindingModel\OutputBindingModel.cs" />
