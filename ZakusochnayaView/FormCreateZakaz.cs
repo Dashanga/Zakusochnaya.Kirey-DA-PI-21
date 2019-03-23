@@ -106,7 +106,7 @@ namespace ZakusochnayaView
                     PokupatelId = Convert.ToInt32(comboBoxClient.SelectedValue),
                     OutputId = Convert.ToInt32(comboBoxProduct.SelectedValue),
                     Number = Convert.ToInt32(textBoxCount.Text),
-                    Summa = Convert.ToInt32(textBoxSum.Text)
+                    Summa = Convert.ToDecimal(textBoxSum.Text)
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
