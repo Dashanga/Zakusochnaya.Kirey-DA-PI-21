@@ -28,27 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.components = new System.ComponentModel.Container();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            this.PokupatelZakazsModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonMake = new System.Windows.Forms.Button();
+            this.buttonToPdf = new System.Windows.Forms.Button();
+            this.reportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
+            ((System.ComponentModel.ISupportInitialize)(this.PokupatelZakazsModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // dateTimePicker1
+            // PokupatelZakazsModelBindingSource
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(32, 12);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(143, 20);
-            this.dateTimePicker1.TabIndex = 0;
+            this.PokupatelZakazsModelBindingSource.DataSource = typeof(ZakusochnayaServiceDAL.ViewModel.PokupatelZakazsModel);
             // 
-            // dateTimePicker2
+            // dateTimePickerFrom
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(217, 13);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(152, 20);
-            this.dateTimePicker2.TabIndex = 1;
+            this.dateTimePickerFrom.Location = new System.Drawing.Point(32, 12);
+            this.dateTimePickerFrom.Name = "dateTimePickerFrom";
+            this.dateTimePickerFrom.Size = new System.Drawing.Size(143, 20);
+            this.dateTimePickerFrom.TabIndex = 0;
+            // 
+            // dateTimePickerTo
+            // 
+            this.dateTimePickerTo.Location = new System.Drawing.Point(217, 13);
+            this.dateTimePickerTo.Name = "dateTimePickerTo";
+            this.dateTimePickerTo.Size = new System.Drawing.Size(152, 20);
+            this.dateTimePickerTo.TabIndex = 1;
             // 
             // label1
             // 
@@ -68,37 +77,55 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "по";
             // 
-            // button1
+            // buttonMake
             // 
-            this.button1.Location = new System.Drawing.Point(386, 9);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Сформировать";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonMake.Location = new System.Drawing.Point(386, 9);
+            this.buttonMake.Name = "buttonMake";
+            this.buttonMake.Size = new System.Drawing.Size(93, 23);
+            this.buttonMake.TabIndex = 4;
+            this.buttonMake.Text = "Сформировать";
+            this.buttonMake.UseVisualStyleBackColor = true;
+            this.buttonMake.Click += new System.EventHandler(this.buttonMake_Click);
             // 
-            // button2
+            // buttonToPdf
             // 
-            this.button2.Location = new System.Drawing.Point(495, 9);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "В pdf";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonToPdf.Location = new System.Drawing.Point(495, 9);
+            this.buttonToPdf.Name = "buttonToPdf";
+            this.buttonToPdf.Size = new System.Drawing.Size(75, 23);
+            this.buttonToPdf.TabIndex = 5;
+            this.buttonToPdf.Text = "В pdf";
+            this.buttonToPdf.UseVisualStyleBackColor = true;
+            this.buttonToPdf.Click += new System.EventHandler(this.buttonToPdf_Click);
+            // 
+            // reportViewer
+            // 
+            reportDataSource1.Name = "DataSetZakazs";
+            reportDataSource1.Value = this.PokupatelZakazsModelBindingSource;
+            this.reportViewer.LocalReport.DataSources.Add(reportDataSource1);
+            this.reportViewer.LocalReport.ReportEmbeddedResource = "ZakusochnayaView.ReportPokupatelZakazs.rdlc";
+            this.reportViewer.Location = new System.Drawing.Point(15, 52);
+            this.reportViewer.Name = "reportViewer";
+            this.reportViewer.ServerReport.BearerToken = null;
+            this.reportViewer.Size = new System.Drawing.Size(714, 246);
+            this.reportViewer.TabIndex = 6;
+            this.reportViewer.Load += new System.EventHandler(this.FormPokupatelZakazs_Load);
             // 
             // FormPokupatelZakazs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(591, 332);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(741, 332);
+            this.Controls.Add(this.reportViewer);
+            this.Controls.Add(this.buttonToPdf);
+            this.Controls.Add(this.buttonMake);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dateTimePickerTo);
+            this.Controls.Add(this.dateTimePickerFrom);
             this.Name = "FormPokupatelZakazs";
             this.Text = "Заказы клиентов";
+            this.Load += new System.EventHandler(this.FormPokupatelZakazs_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.PokupatelZakazsModelBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -106,11 +133,13 @@
 
         #endregion
 
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePickerFrom;
+        private System.Windows.Forms.DateTimePicker dateTimePickerTo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonMake;
+        private System.Windows.Forms.Button buttonToPdf;
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer;
+        private System.Windows.Forms.BindingSource PokupatelZakazsModelBindingSource;
     }
 }
