@@ -17,11 +17,12 @@ namespace ZakusochnayaView
         [Dependency]
         public new IUnityContainer Container { get; set; }
         private readonly IMainService service;
-        private OtchetServiceDB reportService;
-        public FormMain(IMainService service)
+        private readonly IOtchetService reportService;
+        public FormMain(IMainService service, IOtchetService reportService)
         {
             InitializeComponent();
             this.service = service;
+            this.reportService = reportService;
         }
         private void LoadData()
         {
