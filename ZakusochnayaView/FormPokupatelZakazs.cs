@@ -38,7 +38,7 @@ namespace ZakusochnayaView
                     DateFrom = dateTimePickerFrom.Value,
                     DateTo = dateTimePickerTo.Value
                 });
-                ReportDataSource source = new ReportDataSource("DataSetOrders",
+                ReportDataSource source = new ReportDataSource("DataSetZakazs",
                 dataSource);
                 reportViewer.LocalReport.DataSources.Add(source);
                 reportViewer.RefreshReport();

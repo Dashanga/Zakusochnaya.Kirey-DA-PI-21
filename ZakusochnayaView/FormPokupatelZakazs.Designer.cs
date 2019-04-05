@@ -99,16 +99,12 @@
             // 
             // reportViewer
             // 
-            reportDataSource1.Name = "DataSetZakazs";
-            reportDataSource1.Value = this.PokupatelZakazsModelBindingSource;
-            this.reportViewer.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer.LocalReport.ReportEmbeddedResource = "ZakusochnayaView.ReportPokupatelZakazs.rdlc";
             this.reportViewer.Location = new System.Drawing.Point(15, 52);
             this.reportViewer.Name = "reportViewer";
             this.reportViewer.ServerReport.BearerToken = null;
             this.reportViewer.Size = new System.Drawing.Size(714, 246);
             this.reportViewer.TabIndex = 6;
-            this.reportViewer.Load += new System.EventHandler(this.FormPokupatelZakazs_Load);
             // 
             // FormPokupatelZakazs
             // 

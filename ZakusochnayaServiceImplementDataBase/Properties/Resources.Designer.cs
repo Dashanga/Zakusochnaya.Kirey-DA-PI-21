@@ -61,16 +61,12 @@ namespace ZakusochnayaServiceImplementDataBase.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на .
+        ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
         internal static byte[] TIMCYR {
             get {
-                using (var stream = ResourceManager.GetStream("TIMCYR", resourceCulture))
-                {
-                    byte[] bytes = new byte[stream.Length];
-                    stream.Read(bytes, 0, bytes.Length);
-                    return bytes;
-                }
+                object obj = ResourceManager.GetObject("TIMCYR", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }
