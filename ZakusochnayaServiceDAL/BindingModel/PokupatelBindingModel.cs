@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace ZakusochnayaServiceDAL.BindingModel
 {
+    [DataContract]
     public class PokupatelBindingModel
     {
+        [DataMember]
         public int Id { get; set; }
+        [DataMember]
         public string PokupatelFIO { get; set; }
     }
 }
