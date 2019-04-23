@@ -120,7 +120,6 @@
             this.Controls.Add(this.dateTimePickerFrom);
             this.Name = "FormPokupatelZakazs";
             this.Text = "Заказы клиентов";
-            this.Load += new System.EventHandler(this.FormPokupatelZakazs_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PokupatelZakazsModelBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

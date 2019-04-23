@@ -1,21 +1,17 @@
 ﻿using ZakusochnayaServiceDAL.BindingModel;
-using ZakusochnayaServiceDAL.Interfaces;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Windows.Forms;
-using Unity;
+using ZakusochnayaServiceDAL.ViewModel;
+using System.Collections.Generic;
 
 namespace ZakusochnayaView
 {
     public partial class FormPokupatelZakazs : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly IOtchetService service;
-        public FormPokupatelZakazs(IOtchetService service)
+        public FormPokupatelZakazs()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void buttonMake_Click(object sender, EventArgs e)
         {
@@ -33,13 +29,13 @@ namespace ZakusochnayaView
                 " по " +
                 dateTimePickerTo.Value.ToShortDateString());
                 reportViewer.LocalReport.SetParameters(parameter);
-                var dataSource = service.GetClientOrders(new OtchetBindingModel
-                {
-                    DateFrom = dateTimePickerFrom.Value,
-                    DateTo = dateTimePickerTo.Value
-                });
-                ReportDataSource source = new ReportDataSource("DataSetZakazs",
-                dataSource);
+                List<PokupatelZakazsModel> response = APIClient.PostRequest<OtchetBindingModel,
+                    List<PokupatelZakazsModel>>("api/Report/GetPokupatelZakazs", new OtchetBindingModel
+                    {
+                        DateFrom = dateTimePickerFrom.Value,
+                        DateTo = dateTimePickerTo.Value
+                    });
+                ReportDataSource source = new ReportDataSource("DataSetZakazs", response);
                 reportViewer.LocalReport.DataSources.Add(source);
                 reportViewer.RefreshReport();
             }
@@ -65,12 +61,12 @@ namespace ZakusochnayaView
             {
                 try
                 {
-                    service.SaveClientOrders(new OtchetBindingModel
+                    APIClient.PostRequest<OtchetBindingModel, bool>("api/Otchet/SavePokupatelZakazs", new OtchetBindingModel
                     {
-                        FileName = sfd.FileName,
-                        DateFrom = dateTimePickerFrom.Value,
-                        DateTo = dateTimePickerTo.Value
-                    });
+                            FileName = sfd.FileName,
+                            DateFrom = dateTimePickerFrom.Value,
+                            DateTo = dateTimePickerTo.Value
+                        });
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
                 }
@@ -80,11 +76,6 @@ namespace ZakusochnayaView
                     MessageBoxIcon.Error);
                 }
             }
-        }
-
-        private void FormPokupatelZakazs_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

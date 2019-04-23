@@ -1,36 +1,22 @@
 ﻿using ZakusochnayaServiceDAL.BindingModels;
-using ZakusochnayaServiceDAL.Interfaces;
 using ZakusochnayaServiceDAL.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
-using ZakusochnayaServiceDAL;
 using ZakusochnayaServiceDAL.ViewModel;
-//using Unity.Attributes;
 
 namespace ZakusochnayaView
 {
     public partial class FormCreateZakaz : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly IPokupatelService serviceC;
-        private readonly IOutputService serviceP;
-        private readonly IMainService serviceM;
-        public FormCreateZakaz(IPokupatelService serviceC, IOutputService serviceP,
-        IMainService serviceM)
+         public FormCreateZakaz()
         {
             InitializeComponent();
-            this.serviceC = serviceC;
-            this.serviceP = serviceP;
-            this.serviceM = serviceM;
         }
         private void FormCreateZakaz_Load(object sender, EventArgs e)
         {
             try
             {
-                List<PokupatelViewModel> listC = serviceC.GetList();
+                PokupatelViewModel listC = APIClient.GetRequest<PokupatelViewModel>("api/Pokupatel/GetList");
                 if (listC != null)
                 {
                     comboBoxClient.DisplayMember = "PokupatelFIO";
@@ -38,7 +24,7 @@ namespace ZakusochnayaView
                     comboBoxClient.DataSource = listC;
                     comboBoxClient.SelectedItem = null;
                 }
-                List<OutputViewModel> listP = serviceP.GetList();
+                OutputViewModel listP = APIClient.GetRequest<OutputViewModel>("api/Output/GetList");
                 if (listP != null)
                 {
                     comboBoxProduct.DisplayMember = "OutputName";
@@ -61,7 +47,7 @@ namespace ZakusochnayaView
                 try
                 {
                     int id = Convert.ToInt32(comboBoxProduct.SelectedValue);
-                    OutputViewModel product = serviceP.GetElement(id);
+                    OutputViewModel product = APIClient.GetRequest<OutputViewModel>("api/Otchet/Get/" + id);
                     int count = Convert.ToInt32(textBoxCount.Text);
                     textBoxSum.Text = (count * product.Cost).ToString();
                 }
@@ -101,7 +87,7 @@ namespace ZakusochnayaView
             }
             try
             {
-                serviceM.CreateOrder(new ZakazBindingModel
+                APIClient.PostRequest<ZakazBindingModel, bool>("api/Main/CreateZakaz", new ZakazBindingModel
                 {
                     PokupatelId = Convert.ToInt32(comboBoxClient.SelectedValue),
                     OutputId = Convert.ToInt32(comboBoxProduct.SelectedValue),

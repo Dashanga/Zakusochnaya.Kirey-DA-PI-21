@@ -1,32 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Unity;
 using ZakusochnayaServiceDAL;
 using ZakusochnayaServiceDAL.BindingModel;
 using ZakusochnayaServiceDAL.Interfaces;
 using ZakusochnayaServiceDAL.ViewModel;
-using ZakusochnayaServiceDAL.ViewModels;
 
 namespace ZakusochnayaView
 {
     public partial class FormElement : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
-        private readonly IElementService service;
         private int? id;
-        public FormElement(IElementService service)
+        public FormElement()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void FormElement_Load(object sender, EventArgs e)
         {
@@ -34,7 +21,7 @@ namespace ZakusochnayaView
             {
                 try
                 {
-                    ElementViewModel view = service.GetElement(id.Value);
+                    ElementViewModel view = APIClient.GetRequest<ElementViewModel>("api/Element/Get/" + id.Value);
                     if (view != null)
                     {
                         textBoxComponent.Text = view.ElementName;
@@ -59,7 +46,7 @@ namespace ZakusochnayaView
             {
                 if (id.HasValue)
                 {
-                    service.UpdElement(new ElementBindingModel
+                    APIClient.PostRequest<ElementBindingModel, bool>("api/Element/UpdElement", new ElementBindingModel
                     {
                         Id = id.Value,
                         ElementName = textBoxComponent.Text
@@ -67,7 +54,7 @@ namespace ZakusochnayaView
                 }
                 else
                 {
-                    service.AddElement(new ElementBindingModel
+                    APIClient.PostRequest<ElementBindingModel, bool>("api/Pokupatel/AddElement", new ElementBindingModel
                     {
                         ElementName = textBoxComponent.Text
                     });

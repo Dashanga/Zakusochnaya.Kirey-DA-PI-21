@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
+using ZakusochnayaServiceDAL.BindingModels;
 using ZakusochnayaServiceDAL.Interfaces;
 using ZakusochnayaServiceDAL.ViewModels;
 
@@ -9,13 +9,9 @@ namespace ZakusochnayaView
 {
     public partial class FormOutputs : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly IOutputService service;
-        public FormOutputs(IOutputService service)
+        public FormOutputs()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void FormOutputs_Load(object sender, EventArgs e)
         {
@@ -25,7 +21,7 @@ namespace ZakusochnayaView
         {
             try
             {
-                List<OutputViewModel> list = service.GetList();
+                List<OutputViewModel> list = APIClient.GetRequest<List<OutputViewModel>>("api/Output/GetList");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -43,7 +39,7 @@ namespace ZakusochnayaView
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormOutput>();
+            var form = new FormOutput();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
@@ -54,7 +50,7 @@ namespace ZakusochnayaView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<FormOutput>();
+                var form = new FormOutput();
                 form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -70,11 +66,13 @@ namespace ZakusochnayaView
                 if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    int id =
-                    Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                    int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        service.DelElement(id);
+                        APIClient.PostRequest<OutputBindingModel, bool>("api/Pokupatel/DelElement", new OutputBindingModel
+                        {
+                            Id = id
+                        });
                     }
                     catch (Exception ex)
                     {

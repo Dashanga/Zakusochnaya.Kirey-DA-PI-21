@@ -4,31 +4,22 @@ using ZakusochnayaServiceDAL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
-using ZakusochnayaServiceDAL.ViewModel;
 using ZakusochnayaServiceDAL.BindingModel;
-using ZakusochnayaServiceImplementDataBase.Implementations;
 //using Unity.Attributes;
 
 namespace ZakusochnayaView
 {
     public partial class FormMain : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly IMainService service;
-        private readonly IOtchetService reportService;
-        public FormMain(IMainService service, IOtchetService reportService)
+        public FormMain()
         {
             InitializeComponent();
-            this.service = service;
-            this.reportService = reportService;
         }
         private void LoadData()
         {
             try
             {
-                List<ZakazViewModel> list = service.GetList();
+                List<ZakazViewModel> list = APIClient.GetRequest<List<ZakazViewModel>>("api/Main/GetList");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -36,8 +27,7 @@ namespace ZakusochnayaView
                     dataGridView.Columns[1].Visible = false;
                     dataGridView.Columns[3].Visible = false;
                     dataGridView.Columns[5].Visible = false;
-                    dataGridView.Columns[1].AutoSizeMode =
-                    DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)
@@ -48,34 +38,32 @@ namespace ZakusochnayaView
         }
         private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormPokupatels>();
+            var form = new FormPokupatels();
             form.ShowDialog();
         }
         private void компонентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormElements>();
+            var form = new FormElements();
             form.ShowDialog();
         }
         private void продуктыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormOutputs>();
+            var form = new FormOutputs();
             form.ShowDialog();
         }
         private void складыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Container.AddExtension(new Diagnostic());
-            var form = Container.Resolve<FormSklads>();
+            var form = new FormSklads();
             form.ShowDialog();
         }
         private void пополнитьСкладToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Container.AddExtension(new Diagnostic());
-            var form = Container.Resolve<FormPutOnSklad>();
+            var form = new FormPutOnSklad();
             form.ShowDialog();
         }
         private void buttonCreateOrder_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormCreateZakaz>();
+            var form = new FormCreateZakaz();
             form.ShowDialog();
             LoadData();
         }
@@ -87,7 +75,7 @@ namespace ZakusochnayaView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    service.TakeOrderInWork(new ZakazBindingModel { Id = id });
+                    APIClient.PostRequest<ZakazBindingModel, bool>("api/Main/TakeZakazInWork", new ZakazBindingModel { Id = id });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -105,7 +93,7 @@ namespace ZakusochnayaView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    service.FinishOrder(new ZakazBindingModel { Id = id });
+                    APIClient.PostRequest<ZakazBindingModel, bool>("api/Main/FinishOrder", new ZakazBindingModel { Id = id });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -123,7 +111,7 @@ namespace ZakusochnayaView
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    service.PayOrder(new ZakazBindingModel { Id = id });
+                    APIClient.PostRequest<ZakazBindingModel, bool>("api/Main/.PayZakaz", new ZakazBindingModel { Id = id });
                     LoadData();
                 }
                 catch (Exception ex)
@@ -149,10 +137,10 @@ namespace ZakusochnayaView
             {
                 try
                 {
-                    reportService.SaveProductPrice(new OtchetBindingModel
-                    {
-                        FileName = sfd.FileName
-                    });
+                    APIClient.PostRequest<OtchetBindingModel, bool>("api/Report/SaveProductPrice", new OtchetBindingModel
+                        {
+                            FileName = sfd.FileName
+                        });
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
                 }
@@ -166,13 +154,13 @@ namespace ZakusochnayaView
 
         private void загруженностьСкладовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormSkladsLoad>();
+            var form = new FormSkladsLoad();
             form.ShowDialog();
         }
 
         private void заказыКлиентовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormPokupatelZakazs>();
+            var form = new FormPokupatelZakazs();
             form.ShowDialog();
         }
     }

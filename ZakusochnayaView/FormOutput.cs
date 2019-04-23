@@ -4,23 +4,17 @@ using ZakusochnayaServiceDAL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
-//using Unity.Attributes;
 
 namespace ZakusochnayaView
 {
     public partial class FormOutput : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
-        private readonly IOutputService service;
         private int? id;
         private List<OutputElementViewModel> productComponents;
-        public FormOutput(IOutputService service)
+        public FormOutput()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void FormOutput_Load(object sender, EventArgs e)
         {
@@ -28,7 +22,7 @@ namespace ZakusochnayaView
             {
                 try
                 {
-                    OutputViewModel view = service.GetElement(id.Value);
+                    OutputViewModel view = APIClient.GetRequest<OutputViewModel>("api/Output/Get/" + id.Value);
                     if (view != null)
                     {
                         textBoxName.Text = view.OutputName;
@@ -71,7 +65,7 @@ namespace ZakusochnayaView
         }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormOutputElement>();
+            var form = new FormOutputElement();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 if (form.Model != null)
@@ -89,9 +83,8 @@ namespace ZakusochnayaView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<FormOutputElement>();
-                form.Model =
-                productComponents[dataGridView.SelectedRows[0].Cells[0].RowIndex];
+                var form = new FormOutputElement();
+                form.Model = productComponents[dataGridView.SelectedRows[0].Cells[0].RowIndex];
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     productComponents[dataGridView.SelectedRows[0].Cells[0].RowIndex] =
@@ -169,7 +162,7 @@ namespace ZakusochnayaView
                 }
                 if (id.HasValue)
                 {
-                    service.UpdElement(new OutputBindingModel
+                    APIClient.PostRequest<OutputBindingModel, bool>("api/Pokupatel/UpdElement", new OutputBindingModel
                     {
                         Id = id.Value,
                         OutputName = textBoxName.Text,
@@ -179,7 +172,7 @@ namespace ZakusochnayaView
                 }
                 else
                 {
-                    service.AddElement(new OutputBindingModel
+                    APIClient.PostRequest<OutputBindingModel, bool>("api/Pokupatel/AddElement", new OutputBindingModel
                     {
                         OutputName = textBoxName.Text,
                         Cost = Convert.ToInt32(textBoxPrice.Text),

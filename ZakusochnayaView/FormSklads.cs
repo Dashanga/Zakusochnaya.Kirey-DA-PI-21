@@ -1,22 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
-using ZakusochnayaServiceDAL;
-using ZakusochnayaServiceDAL.Interfaces;
+using ZakusochnayaServiceDAL.BindingModel;
 using ZakusochnayaServiceDAL.ViewModel;
 
 namespace ZakusochnayaView
 {
     public partial class FormSklads : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly ISkladService service;
-        public FormSklads(ISkladService service)
+        public FormSklads()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void FormSklads_Load(object sender, EventArgs e)
         {
@@ -26,7 +20,7 @@ namespace ZakusochnayaView
         {
             try
             {
-                List<SkladViewModel> list = service.GetList();
+                List<SkladViewModel> list = APIClient.GetRequest<List<SkladViewModel>>("api/Sklad/GetList");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -43,7 +37,7 @@ namespace ZakusochnayaView
         }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormSklad>();
+            var form = new FormSklad();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
@@ -61,7 +55,10 @@ namespace ZakusochnayaView
                     Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        service.DelElement(id);
+                        APIClient.PostRequest<SkladBindingModel, bool>("api/Pokupatel/DelElement", new SkladBindingModel
+                        {
+                            Id = id
+                        });
                     }
                     catch (Exception ex)
                     {
@@ -82,7 +79,7 @@ namespace ZakusochnayaView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<FormSklad>();
+                var form = new FormSklad();
                 form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
