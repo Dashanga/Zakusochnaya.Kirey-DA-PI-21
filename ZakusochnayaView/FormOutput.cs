@@ -166,7 +166,7 @@ namespace ZakusochnayaView
                     {
                         Id = id.Value,
                         OutputName = textBoxName.Text,
-                        Cost = Convert.ToInt32(textBoxPrice.Text),
+                        Cost = Convert.ToDecimal(textBoxPrice.Text),
                         OutputElements = productComponentBM
                     });
                 }
@@ -175,7 +175,7 @@ namespace ZakusochnayaView
                     APIClient.PostRequest<OutputBindingModel, bool>("api/Pokupatel/AddElement", new OutputBindingModel
                     {
                         OutputName = textBoxName.Text,
-                        Cost = Convert.ToInt32(textBoxPrice.Text),
+                        Cost = Convert.ToDecimal(textBoxPrice.Text),
                         OutputElements = productComponentBM
                     });
                 }
