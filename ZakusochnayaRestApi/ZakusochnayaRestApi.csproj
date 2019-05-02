@@ -186,10 +186,6 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ZakusochnayaModel\ZakusochnayaModel.csproj">
-      <Project>{602e31e3-b4cb-4b93-af52-f5ad5662b6a2}</Project>
-      <Name>ZakusochnayaModel</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ZakusochnayaServiceDAL\ZakusochnayaServiceDAL.csproj">
       <Project>{ed3030ba-8284-4b11-b33b-4507892afa5c}</Project>
       <Name>ZakusochnayaServiceDAL</Name>
@@ -197,14 +193,6 @@
     <ProjectReference Include="..\ZakusochnayaServiceImplementDataBase\ZakusochnayaServiceImplementDataBase.csproj">
       <Project>{05f48998-11ae-4476-a527-75f6e7e36d28}</Project>
       <Name>ZakusochnayaServiceImplementDataBase</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ZakusochnayaServiceImplementList\ZakusochnayaServiceImplement.csproj">
-      <Project>{a498405d-0800-4d21-961b-0801c431144a}</Project>
-      <Name>ZakusochnayaServiceImplement</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ZakusochnayaView\ZakusochnayaView.csproj">
-      <Project>{c97daf81-a49e-44cb-8d97-70bc97af3cf7}</Project>
-      <Name>ZakusochnayaView</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
