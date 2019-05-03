@@ -12,14 +12,14 @@ namespace ZakusochnayaViewWeb.Controllers
     public class ElementController : Controller
     {
         private IElementService service = Globals.ElementService;
-        // GET: Ingredients
+        // GET: Elements
         public ActionResult Index()
         {
             return View(service.GetList());
         }
 
 
-        // GET: Ingredients/Create
+        // GET: Elements/Create
         public ActionResult Create()
         {
             return View();
@@ -37,7 +37,7 @@ namespace ZakusochnayaViewWeb.Controllers
         }
 
 
-        // GET: Ingredients/Edit/5
+        // GET: Elements/Edit/5
         public ActionResult Edit(int id)
         {
             var viewModel = service.GetElement(id);
@@ -62,7 +62,7 @@ namespace ZakusochnayaViewWeb.Controllers
         }
 
 
-        // GET: Ingredients/Delete/5
+        // GET: Elements/Delete/5
         public ActionResult Delete(int id)
         {
             service.DelElement(id);

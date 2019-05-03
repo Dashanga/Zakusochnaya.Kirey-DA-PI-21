@@ -27,15 +27,15 @@ namespace ZakusochnayaViewWeb.Controllers
             return View((OutputViewModel)Session["Output"]);
         }
 
-        public ActionResult AddIngredient()
+        public ActionResult AddElement()
         {
             var ingredients = new SelectList(ingredientService.GetList(), "Id", "ElementName");
-            ViewBag.Ingredients = ingredients;
+            ViewBag.Elements = ingredients;
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddIngredientPost()
+        public ActionResult AddElementPost()
         {
             var output = (OutputViewModel)Session["Output"];
             var ingredient = new OutputElementViewModel

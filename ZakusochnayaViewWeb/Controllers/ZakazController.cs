@@ -13,7 +13,7 @@ using ZakusochnayaServiceDAL.ViewModels;
 
 namespace ZakusochnayaViewWeb.Controllers
 {
-    public class MainController : Controller
+    public class ZakazController : Controller
     {
         private IOutputService outputService = Globals.OutputService;
         private IMainService mainService = Globals.MainService;

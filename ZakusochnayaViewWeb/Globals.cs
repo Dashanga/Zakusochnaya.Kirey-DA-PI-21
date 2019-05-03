@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using ZakusochnayaServiceDAL;
+﻿using ZakusochnayaServiceDAL;
 using ZakusochnayaServiceDAL.Interfaces;
-using ZakusochnayaServiceDAL.ViewModel;
 using ZakusochnayaServiceImplementList.Implementations;
 
-namespace PizzeriaWebView
+namespace ZakusochnayaViewWeb
 {
     public static class Globals
     {
