@@ -40,8 +40,8 @@ namespace ZakusochnayaViewWeb.Controllers
             var output = (OutputViewModel)Session["Output"];
             var ingredient = new OutputElementViewModel
             {
-                Id = int.Parse(Request["Id"]),
-                ElementName = ingredientService.GetElement(int.Parse(Request["Id"])).ElementName,
+                ElementId = int.Parse(Request["ElementId"]),
+                ElementName = ingredientService.GetElement(int.Parse(Request["ElementId"])).ElementName,
                 Number = int.Parse(Request["Number"])
             };
             output.OutputElements.Add(ingredient);

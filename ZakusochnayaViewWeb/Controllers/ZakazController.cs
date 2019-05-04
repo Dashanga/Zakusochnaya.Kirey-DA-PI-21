@@ -38,7 +38,7 @@ namespace ZakusochnayaViewWeb.Controllers
         [HttpPost]
         public ActionResult CreatePost()
         {
-            var customerId = int.Parse(Request["Id"]);
+            var customerId = int.Parse(Request["PokupatelId"]);
             var outputId = int.Parse(Request["OutputId"]);
             var Count = int.Parse(Request["Number"]);
             var totalCost = CalcSum(outputId, Count);
