@@ -21,7 +21,7 @@ namespace ZakusochnayaView
         {
             try
             {
-                List<PokupatelViewModel> list = APIClient.GetRequest<List<PokupatelViewModel>>("api/Pokupael/GetList");
+                List<PokupatelViewModel> list = APIClient.GetRequest<List<PokupatelViewModel>>("api/Pokupatel/GetList");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
