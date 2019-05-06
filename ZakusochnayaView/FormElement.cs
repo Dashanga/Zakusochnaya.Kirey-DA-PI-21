@@ -54,7 +54,7 @@ namespace ZakusochnayaView
                 }
                 else
                 {
-                    APIClient.PostRequest<ElementBindingModel, bool>("api/Pokupatel/AddElement", new ElementBindingModel
+                    APIClient.PostRequest<ElementBindingModel, bool>("api/Element/AddElement", new ElementBindingModel
                     {
                         ElementName = textBoxComponent.Text
                     });

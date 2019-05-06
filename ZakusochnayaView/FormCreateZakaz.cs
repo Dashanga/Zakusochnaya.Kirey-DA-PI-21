@@ -3,6 +3,7 @@ using ZakusochnayaServiceDAL.ViewModels;
 using System;
 using System.Windows.Forms;
 using ZakusochnayaServiceDAL.ViewModel;
+using System.Collections.Generic;
 
 namespace ZakusochnayaView
 {
@@ -16,7 +17,7 @@ namespace ZakusochnayaView
         {
             try
             {
-                PokupatelViewModel listC = APIClient.GetRequest<PokupatelViewModel>("api/Pokupatel/GetList");
+                List<PokupatelViewModel> listC = APIClient.GetRequest<List<PokupatelViewModel>>("api/Pokupatel/GetList");
                 if (listC != null)
                 {
                     comboBoxClient.DisplayMember = "PokupatelFIO";
@@ -24,7 +25,7 @@ namespace ZakusochnayaView
                     comboBoxClient.DataSource = listC;
                     comboBoxClient.SelectedItem = null;
                 }
-                OutputViewModel listP = APIClient.GetRequest<OutputViewModel>("api/Output/GetList");
+                List<OutputViewModel> listP = APIClient.GetRequest<List<OutputViewModel>>("api/Output/GetList");
                 if (listP != null)
                 {
                     comboBoxProduct.DisplayMember = "OutputName";
@@ -47,7 +48,7 @@ namespace ZakusochnayaView
                 try
                 {
                     int id = Convert.ToInt32(comboBoxProduct.SelectedValue);
-                    OutputViewModel product = APIClient.GetRequest<OutputViewModel>("api/Otchet/Get/" + id);
+                    OutputViewModel product = APIClient.GetRequest<OutputViewModel>("api/Output/Get/" + id);
                     int count = Convert.ToInt32(textBoxCount.Text);
                     textBoxSum.Text = (count * product.Cost).ToString();
                 }

@@ -137,7 +137,7 @@ namespace ZakusochnayaView
             {
                 try
                 {
-                    APIClient.PostRequest<OtchetBindingModel, bool>("api/Report/SaveProductPrice", new OtchetBindingModel
+                    APIClient.PostRequest<OtchetBindingModel, bool>("api/Otchet/SaveProductPrice", new OtchetBindingModel
                         {
                             FileName = sfd.FileName
                         });

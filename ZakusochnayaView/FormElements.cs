@@ -72,7 +72,7 @@ namespace ZakusochnayaView
                     int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        APIClient.PostRequest<ElementBindingModel, bool>("api/Pokupatel/DelElement", new ElementBindingModel
+                        APIClient.PostRequest<ElementBindingModel, bool>("api/Element/DelElement", new ElementBindingModel
                         {
                             Id = id
                         });

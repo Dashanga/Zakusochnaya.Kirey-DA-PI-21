@@ -162,7 +162,7 @@ namespace ZakusochnayaView
                 }
                 if (id.HasValue)
                 {
-                    APIClient.PostRequest<OutputBindingModel, bool>("api/Pokupatel/UpdElement", new OutputBindingModel
+                    APIClient.PostRequest<OutputBindingModel, bool>("api/Output/UpdElement", new OutputBindingModel
                     {
                         Id = id.Value,
                         OutputName = textBoxName.Text,
@@ -172,7 +172,7 @@ namespace ZakusochnayaView
                 }
                 else
                 {
-                    APIClient.PostRequest<OutputBindingModel, bool>("api/Pokupatel/AddElement", new OutputBindingModel
+                    APIClient.PostRequest<OutputBindingModel, bool>("api/Output/AddElement", new OutputBindingModel
                     {
                         OutputName = textBoxName.Text,
                         Cost = Convert.ToDecimal(textBoxPrice.Text),

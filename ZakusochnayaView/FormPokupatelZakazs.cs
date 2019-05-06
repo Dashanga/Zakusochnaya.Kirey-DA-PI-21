@@ -30,7 +30,7 @@ namespace ZakusochnayaView
                 dateTimePickerTo.Value.ToShortDateString());
                 reportViewer.LocalReport.SetParameters(parameter);
                 List<PokupatelZakazsModel> response = APIClient.PostRequest<OtchetBindingModel,
-                    List<PokupatelZakazsModel>>("api/Report/GetPokupatelZakazs", new OtchetBindingModel
+                    List<PokupatelZakazsModel>>("api/Otchet/GetPokupatelZakazs", new OtchetBindingModel
                     {
                         DateFrom = dateTimePickerFrom.Value,
                         DateTo = dateTimePickerTo.Value

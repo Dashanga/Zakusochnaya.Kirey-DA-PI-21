@@ -27,7 +27,7 @@ namespace ZakusochnayaView
                     comboBoxComponent.DataSource = listC;
                     comboBoxComponent.SelectedItem = null;
                 }
-                List<SkladViewModel> listS = APIClient.GetRequest<List<SkladViewModel>>("api/Element/GetList");
+                List<SkladViewModel> listS = APIClient.GetRequest<List<SkladViewModel>>("api/Sklad/GetList");
                 if (listS != null)
                 {
                     comboBoxStock.DisplayMember = "SkladName";

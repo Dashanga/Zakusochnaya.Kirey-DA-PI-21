@@ -55,7 +55,7 @@ namespace ZakusochnayaView
                     Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        APIClient.PostRequest<SkladBindingModel, bool>("api/Pokupatel/DelElement", new SkladBindingModel
+                        APIClient.PostRequest<SkladBindingModel, bool>("api/Sklad/DelElement", new SkladBindingModel
                         {
                             Id = id
                         });
