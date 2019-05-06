@@ -12,6 +12,7 @@ namespace ZakusochnayaServiceDAL.Interfaces
     public interface IMainService
     {
         List<ZakazViewModel> GetList();
+        List<ZakazViewModel> GetFreeOrders();
         void CreateOrder(ZakazBindingModel model);
         void TakeOrderInWork(ZakazBindingModel model);
         void FinishOrder(ZakazBindingModel model);

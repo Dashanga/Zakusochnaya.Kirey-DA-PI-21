@@ -21,6 +21,10 @@ namespace ZakusochnayaServiceDAL.ViewModels
         [DataMember]
         public string OutputName { get; set; }
         [DataMember]
+        public int? ExecutorId { get; set; }
+        [DataMember]
+        public string ExecutorName { get; set; }
+        [DataMember]
         public int Number { get; set; }
         [DataMember]
         public decimal Summa { get; set; }

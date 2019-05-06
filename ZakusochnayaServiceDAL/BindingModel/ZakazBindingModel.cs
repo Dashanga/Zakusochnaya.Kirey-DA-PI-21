@@ -17,6 +17,8 @@ namespace ZakusochnayaServiceDAL.BindingModels
         [DataMember]
         public int OutputId { get; set; }
         [DataMember]
+        public int? ExecutorId { get; set; }
+        [DataMember]
         public int Number { get; set; }
         [DataMember]
         public decimal Summa { get; set; }

@@ -1,4 +1,4 @@
-namespace ZakusochnayaServiceImplementDataBase.Migrations
+﻿namespace ZakusochnayaServiceImplementDataBase.Migrations
 {
     using System;
     using System.Data.Entity;

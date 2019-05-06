@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Executor.cs" />
     <Compile Include="Pokupatel.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="Output.cs" />
