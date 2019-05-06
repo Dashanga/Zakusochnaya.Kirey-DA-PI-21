@@ -44,6 +44,20 @@ namespace ZakusochnayaServiceImplementDataBase.Implementations
             .ToList();
             return result;
         }
+
+
+        public List<ZakazViewModel> GetFreeOrders()
+        {
+            List<ZakazViewModel> result = context.Zakazs
+            .Where(x => x.Status == ZakazStatus.Принят || x.Status ==
+           ZakazStatus.НедостаточноРесурсов)
+            .Select(rec => new ZakazViewModel
+            {
+                Id = rec.Id
+            })
+            .ToList();
+            return result;
+        }
         public void CreateOrder(ZakazBindingModel model)
         {
             context.Zakazs.Add(new Zakaz

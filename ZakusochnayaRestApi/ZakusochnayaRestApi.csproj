@@ -156,6 +156,7 @@
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ElementController.cs" />
+    <Compile Include="Controllers\ExecutorController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\OtchetController.cs" />
     <Compile Include="Controllers\OutputController.cs" />
@@ -166,6 +167,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\WorkExecutor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
