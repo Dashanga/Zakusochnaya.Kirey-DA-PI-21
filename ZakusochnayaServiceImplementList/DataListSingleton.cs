@@ -12,6 +12,7 @@ namespace ZakusochnayaServiceImplementList
         public List<Output> Outputs { get; set; }
         public List<OutputElement> OutputElements { get; set; }
         public List<Sklad> Sklads { get; set; }
+        public List<Executor> Executors { get; set; }
         public List<SkladElement> SkladElements { get; set; }
         private DataListSingleton()
         {

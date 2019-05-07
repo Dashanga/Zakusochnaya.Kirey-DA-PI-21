@@ -51,7 +51,7 @@ namespace ZakusochnayaView
             {
                 if (id.HasValue)
                 {
-                    APIClient.PostRequest<ExecutorBindingModel, bool>("api/Executor/UpdExecutor", new ExecutorBindingModel
+                    APIClient.PostRequest<ExecutorBindingModel, bool>("api/Executor/UpdElement", new ExecutorBindingModel
                     {
                         Id = id.Value,
                         ExecutorFIO = textBoxExecutor.Text
@@ -59,7 +59,7 @@ namespace ZakusochnayaView
                 }
                 else
                 {
-                    APIClient.PostRequest<ExecutorBindingModel, bool>("api/Executor/AddExecutor", new ExecutorBindingModel
+                    APIClient.PostRequest<ExecutorBindingModel, bool>("api/Executor/AddElement", new ExecutorBindingModel
                     {
                         ExecutorFIO = textBoxExecutor.Text
                     });
