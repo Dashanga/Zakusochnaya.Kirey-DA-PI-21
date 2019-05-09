@@ -88,7 +88,7 @@ namespace ZakusochnayaView
             }
             try
             {
-                APIClient.PostRequest<ZakazBindingModel, bool>("api/Main/CreateZakaz", new ZakazBindingModel
+                APIClient.PostRequest<ZakazBindingModel, bool>("api/Main/CreateOrder", new ZakazBindingModel
                 {
                     PokupatelId = Convert.ToInt32(comboBoxClient.SelectedValue),
                     OutputId = Convert.ToInt32(comboBoxProduct.SelectedValue),
