@@ -158,7 +158,7 @@ namespace ZakusochnayaServiceImplementDataBase.Implementations
             element.Status = ZakazStatus.Оплачен;
             context.SaveChanges();
         }
-        public void PutComponentOnStock(SkladElementBindingModel model)
+        public void PutComponentOnSklad(SkladElementBindingModel model)
         {
             SkladElement element = context.SkladElements.FirstOrDefault(rec =>
             rec.SkladId == model.SkladId && rec.ElementId == model.ElementId);

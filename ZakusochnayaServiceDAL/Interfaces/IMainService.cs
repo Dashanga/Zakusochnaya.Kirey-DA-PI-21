@@ -17,6 +17,6 @@ namespace ZakusochnayaServiceDAL.Interfaces
         void TakeOrderInWork(ZakazBindingModel model);
         void FinishOrder(ZakazBindingModel model);
         void PayOrder(ZakazBindingModel model);
-        void PutComponentOnStock(SkladElementBindingModel model);
+        void PutComponentOnSklad(SkladElementBindingModel model);
     }
 }

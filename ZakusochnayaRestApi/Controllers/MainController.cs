@@ -41,9 +41,9 @@ namespace ZakusochnayaRestApi.Controllers
             _service.PayOrder(model);
         }
         [HttpPost]
-        public void PutComponentOnStock(SkladElementBindingModel model)
+        public void PutComponentOnSklad(SkladElementBindingModel model)
         {
-            _service.PutComponentOnStock(model);
+            _service.PutComponentOnSklad(model);
         }
         [HttpPost]
         public void StartWork()

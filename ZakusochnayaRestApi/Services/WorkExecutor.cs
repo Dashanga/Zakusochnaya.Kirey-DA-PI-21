@@ -43,7 +43,7 @@ namespace ZakusochnayaRestApi.Services
                 // забиваем мастерскую
                 _sem.WaitOne();
                 // Типа выполняем
-                Thread.Sleep(10000);
+                Thread.Sleep(100000);
                 _service.FinishOrder(new ZakazBindingModel
                 {
                     Id = _orderId
