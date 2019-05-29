@@ -7,6 +7,7 @@ using ZakusochnayaServiceDAL.ViewModels;
 using ZakusochnayaServiceDAL.ViewModel;
 using ZakusochnayaRestApi.Services;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ZakusochnayaRestApi.Controllers
 {
@@ -43,6 +44,7 @@ namespace ZakusochnayaRestApi.Controllers
         [HttpPost]
         public void PutComponentOnSklad(SkladElementBindingModel model)
         {
+            
             _service.PutComponentOnSklad(model);
         }
         [HttpPost]

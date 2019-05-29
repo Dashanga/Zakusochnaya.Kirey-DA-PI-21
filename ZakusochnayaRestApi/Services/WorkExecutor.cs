@@ -1,7 +1,7 @@
 ﻿using ZakusochnayaServiceDAL.BindingModels;
 using ZakusochnayaServiceDAL.Interfaces;
 using System;
-using System.Threading;
+using System.Threading;using System.Diagnostics;
 
 namespace ZakusochnayaRestApi.Services
 {
@@ -43,7 +43,7 @@ namespace ZakusochnayaRestApi.Services
                 // забиваем мастерскую
                 _sem.WaitOne();
                 // Типа выполняем
-                Thread.Sleep(100000);
+                Thread.Sleep(10000);
                 _service.FinishOrder(new ZakazBindingModel
                 {
                     Id = _orderId
