@@ -25,6 +25,7 @@ namespace ZakusochnayaServiceImplementDataBase.Implementations
                 Id = rec.Id,
                 PokupatelId = rec.PokupatelId,
                 OutputId = rec.OutputId,
+                ExecutorId = rec.ExecutorId,
                 DateCreate = SqlFunctions.DateName("dd", rec.DateCreate) + " " +
             SqlFunctions.DateName("mm", rec.DateCreate) + " " +
             SqlFunctions.DateName("yyyy", rec.DateCreate),
@@ -39,7 +40,8 @@ namespace ZakusochnayaServiceImplementDataBase.Implementations
                 Number = rec.Number,
                 Summa = rec.Summa,
                 PokupatelFIO = rec.Pokupatel.PokupatelFIO,
-                OutputName = rec.Output.OutputName
+                OutputName = rec.Output.OutputName,
+                ExecutorName = rec.Executor.ExecutorFIO
             })
             .ToList();
             return result;
@@ -118,6 +120,7 @@ namespace ZakusochnayaServiceImplementDataBase.Implementations
                             outputElement.Element.ElementName + " требуется " + outputElement.Number + ", не хватает " + countOnStocks);
                         }
                     }
+                    element.ExecutorId = model.ExecutorId;
                     element.DateImplement = DateTime.Now;
                     element.Status = ZakazStatus.Выполняется;
                     context.SaveChanges();
