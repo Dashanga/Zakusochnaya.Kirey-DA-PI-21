@@ -82,6 +82,10 @@
     <Compile Include="Migrations\201905292137259_ThirdMigration.Designer.cs">
       <DependentUpon>201905292137259_ThirdMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905301211416_NovayaMigration.cs" />
+    <Compile Include="Migrations\201905301211416_NovayaMigration.Designer.cs">
+      <DependentUpon>201905301211416_NovayaMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -115,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905292137259_ThirdMigration.resx">
       <DependentUpon>201905292137259_ThirdMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905301211416_NovayaMigration.resx">
+      <DependentUpon>201905301211416_NovayaMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
