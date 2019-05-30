@@ -158,6 +158,7 @@
     <Compile Include="Controllers\ElementController.cs" />
     <Compile Include="Controllers\ExecutorController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\MessageInfoController.cs" />
     <Compile Include="Controllers\OtchetController.cs" />
     <Compile Include="Controllers\OutputController.cs" />
     <Compile Include="Controllers\OutputElementController.cs" />

@@ -12,6 +12,7 @@ namespace ZakusochnayaView
         static void Main()
         {
             APIClient.Connect();
+            MailClient.Connect();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());

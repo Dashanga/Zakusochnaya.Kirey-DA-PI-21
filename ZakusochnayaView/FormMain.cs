@@ -136,7 +136,12 @@ namespace ZakusochnayaView
             var form = new FormPokupatelZakazs();
             form.ShowDialog();
         }
-      
+        private void почтаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new FormMails();
+            form.ShowDialog();
+        }
+
         private void запускРаботToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             try

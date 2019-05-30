@@ -8,6 +8,8 @@ namespace ZakusochnayaServiceDAL.BindingModel
         [DataMember]
         public int Id { get; set; }
         [DataMember]
+        public string Mail { get; set; }
+        [DataMember]
         public string PokupatelFIO { get; set; }
     }
 }

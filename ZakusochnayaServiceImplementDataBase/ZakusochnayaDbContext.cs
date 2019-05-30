@@ -19,6 +19,7 @@ namespace ZakusochnayaServiceImplementDataBase
         public virtual DbSet<Output> Outputs { get; set; }
         public virtual DbSet<OutputElement> OutputElements { get; set; }
         public virtual DbSet<Sklad> Sklads { get; set; }
+        public virtual DbSet<MessageInfo> MessageInfos { get; set; }
         public virtual DbSet<SkladElement> SkladElements { get; set; }
         public virtual DbSet<Executor> Executors { get; set; }
     }
