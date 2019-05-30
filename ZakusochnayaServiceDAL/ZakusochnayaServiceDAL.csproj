@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributies\CustomInterfaceAttribute.cs" />
+    <Compile Include="Attributies\CustomMethodAttribute.cs" />
     <Compile Include="BindingModel\ExecutorBindingModel.cs" />
     <Compile Include="BindingModel\MessageInfoBindingModel.cs" />
     <Compile Include="BindingModel\OtchetBindingModel.cs" />
@@ -53,11 +55,11 @@
     <Compile Include="Interfaces\IExecutorService.cs" />
     <Compile Include="Interfaces\IMessageInfoService.cs" />
     <Compile Include="Interfaces\IOtchetService.cs" />
+    <Compile Include="Interfaces\IOutputElementService.cs" />
     <Compile Include="Interfaces\IPokupatelService.cs" />
     <Compile Include="BindingModel\ZakazBindingModel.cs" />
     <Compile Include="Interfaces\IElementService.cs" />
     <Compile Include="Interfaces\IMainService.cs" />
-    <Compile Include="Interfaces\IOutputElementService.cs" />
     <Compile Include="Interfaces\IOutputService.cs" />
     <Compile Include="Interfaces\ISkladService.cs" />
     <Compile Include="ViewModel\ExecutorViewModel.cs" />

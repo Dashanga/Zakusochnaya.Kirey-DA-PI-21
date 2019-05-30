@@ -8,6 +8,7 @@ using ZakusochnayaServiceDAL.ViewModel;
 using ZakusochnayaRestApi.Services;
 using System.Collections.Generic;
 using System.Diagnostics;
+//http://localhost:49622/api/Main/GetInfo
 
 namespace ZakusochnayaRestApi.Controllers
 {
@@ -60,6 +61,17 @@ namespace ZakusochnayaRestApi.Controllers
                 }
                 new WorkExecutor(_service, _serviceImplementer, impl.Id, order.Id);
             }
+        }
+        [HttpGet]
+        public IHttpActionResult GetInfo()
+        {
+            ReflectionService service = new ReflectionService();
+            var list = service.GetInfoByAssembly();
+            if (list == null)
+            {
+                InternalServerError(new Exception("Нет данных"));
+            }
+            return Ok(list);
         }
     }
 }
