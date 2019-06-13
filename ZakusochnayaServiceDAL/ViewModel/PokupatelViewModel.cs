@@ -8,7 +8,7 @@ namespace ZakusochnayaServiceDAL.ViewModel
 {
     public class PokupatelViewModel
     {
-        public int Id { get; set; }
+        public int PokupatelId { get; set; }
         public string PokupatelFIO { get; set; }
     }
 }

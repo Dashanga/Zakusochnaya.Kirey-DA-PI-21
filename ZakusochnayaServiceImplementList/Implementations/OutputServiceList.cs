@@ -24,13 +24,13 @@ namespace ZakusochnayaServiceImplementList.Implementations
             List<OutputElementViewModel>();
                 for (int j = 0; j < source.OutputElements.Count; ++j)
                 {
-                    if (source.OutputElements[j].OutputId == source.Outputs[i].Id)
+                    if (source.OutputElements[j].OutputId == source.Outputs[i].OutputId)
                     {
                         string elementName = string.Empty;
                         for (int k = 0; k < source.Elements.Count; ++k)
                         {
                             if (source.OutputElements[j].ElementId ==
-                            source.Elements[k].Id)
+                            source.Elements[k].ElementId)
                             {
                                 elementName = source.Elements[k].ElementName;
                                 break;
@@ -38,7 +38,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
                         }
                         outputElements.Add(new OutputElementViewModel
                         {
-                            Id = source.OutputElements[j].Id,
+                            OutputElementId = source.OutputElements[j].OutputElementId,
                             OutputId = source.OutputElements[j].OutputId,
                             ElementId = source.OutputElements[j].ElementId,
                             ElementName = elementName,
@@ -48,7 +48,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
                 }
                 result.Add(new OutputViewModel
                 {
-                    Id = source.Outputs[i].Id,
+                    OutputId = source.Outputs[i].OutputId,
                     OutputName = source.Outputs[i].OutputName,
                     Cost = source.Outputs[i].Cost,
                     OutputElements = outputElements
@@ -65,13 +65,13 @@ namespace ZakusochnayaServiceImplementList.Implementations
             List<OutputElementViewModel>();
                 for (int j = 0; j < source.OutputElements.Count; ++j)
                 {
-                    if (source.OutputElements[j].OutputId == source.Outputs[i].Id)
+                    if (source.OutputElements[j].OutputId == source.Outputs[i].OutputId)
                     {
                         string elementName = string.Empty;
                         for (int k = 0; k < source.Elements.Count; ++k)
                         {
                             if (source.OutputElements[j].ElementId ==
-                            source.Elements[k].Id)
+                            source.Elements[k].ElementId)
                             {
                                 elementName = source.Elements[k].ElementName;
                                 break;
@@ -79,7 +79,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
                         }
                         outputElements.Add(new OutputElementViewModel
                         {
-                            Id = source.OutputElements[j].Id,
+                            OutputElementId = source.OutputElements[j].OutputElementId,
                             OutputId = source.OutputElements[j].OutputId,
                             ElementId = source.OutputElements[j].ElementId,
                             ElementName = elementName,
@@ -87,11 +87,11 @@ namespace ZakusochnayaServiceImplementList.Implementations
                         });
                     }
                 }
-                if (source.Outputs[i].Id == id)
+                if (source.Outputs[i].OutputId == id)
                 {
                     return new OutputViewModel
                     {
-                        Id = source.Outputs[i].Id,
+                        OutputId = source.Outputs[i].OutputId,
                         OutputName = source.Outputs[i].OutputName,
                         Cost = source.Outputs[i].Cost,
                         OutputElements = outputElements
@@ -105,9 +105,9 @@ namespace ZakusochnayaServiceImplementList.Implementations
             int maxId = 0;
             for (int i = 0; i < source.Outputs.Count; ++i)
             {
-                if (source.Outputs[i].Id > maxId)
+                if (source.Outputs[i].OutputId > maxId)
                 {
-                    maxId = source.Outputs[i].Id;
+                    maxId = source.Outputs[i].OutputId;
                 }
                 if (source.Outputs[i].OutputName == model.OutputName)
                 {
@@ -116,7 +116,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
             }
             source.Outputs.Add(new Output
             {
-                Id = maxId + 1,
+                OutputId = maxId + 1,
                 OutputName = model.OutputName,
                 Cost = model.Cost
             });
@@ -124,9 +124,9 @@ namespace ZakusochnayaServiceImplementList.Implementations
             int maxPCId = 0;
             for (int i = 0; i < source.OutputElements.Count; ++i)
             {
-                if (source.OutputElements[i].Id > maxPCId)
+                if (source.OutputElements[i].OutputElementId > maxPCId)
                 {
-                    maxPCId = source.OutputElements[i].Id;
+                    maxPCId = source.OutputElements[i].OutputElementId;
                 }
             }
             // убираем дубли по компонентам
@@ -148,7 +148,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
             {
                 source.OutputElements.Add(new OutputElement
                 {
-                    Id = ++maxPCId,
+                    OutputElementId = ++maxPCId,
                     OutputId = maxId + 1,
                     ElementId = model.OutputElements[i].ElementId,
                     Number = model.OutputElements[i].Number
@@ -160,12 +160,12 @@ namespace ZakusochnayaServiceImplementList.Implementations
             int index = -1;
             for (int i = 0; i < source.Outputs.Count; ++i)
             {
-                if (source.Outputs[i].Id == model.Id)
+                if (source.Outputs[i].OutputId == model.OutputId)
                 {
                     index = i;
                 }
                 if (source.Outputs[i].OutputName == model.OutputName &&
-                source.Outputs[i].Id != model.Id)
+                source.Outputs[i].OutputId != model.OutputId)
                 {
                     throw new Exception("Уже есть продукт с таким названием");
                 }
@@ -179,22 +179,22 @@ namespace ZakusochnayaServiceImplementList.Implementations
             int maxPCId = 0;
             for (int i = 0; i < source.OutputElements.Count; ++i)
             {
-                if (source.OutputElements[i].Id > maxPCId)
+                if (source.OutputElements[i].OutputElementId > maxPCId)
                 {
-                    maxPCId = source.OutputElements[i].Id;
+                    maxPCId = source.OutputElements[i].OutputElementId;
                 }
             }
             // обновляем существуюущие компоненты
             for (int i = 0; i < source.OutputElements.Count; ++i)
             {
-                if (source.OutputElements[i].OutputId == model.Id)
+                if (source.OutputElements[i].OutputId == model.OutputId)
                 {
                     bool flag = true;
                     for (int j = 0; j < model.OutputElements.Count; ++j)
                     {
                         // если встретили, то изменяем количество
-                        if (source.OutputElements[i].Id ==
-                        model.OutputElements[j].Id)
+                        if (source.OutputElements[i].OutputElementId ==
+                        model.OutputElements[j].OutputElementId)
                         {
                             source.OutputElements[i].Number =
                             model.OutputElements[j].Number;
@@ -212,29 +212,29 @@ namespace ZakusochnayaServiceImplementList.Implementations
             // новые записи
             for (int i = 0; i < model.OutputElements.Count; ++i)
             {
-                if (model.OutputElements[i].Id == 0)
+                if (model.OutputElements[i].OutputElementId == 0)
                 {
                     // ищем дубли
                     for (int j = 0; j < source.OutputElements.Count; ++j)
                     {
-                        if (source.OutputElements[j].OutputId == model.Id &&
+                        if (source.OutputElements[j].OutputId == model.OutputId &&
                         source.OutputElements[j].ElementId ==
                         model.OutputElements[i].ElementId)
                         {
                             source.OutputElements[j].Number +=
                             model.OutputElements[i].Number;
-                            model.OutputElements[i].Id =
-                            source.OutputElements[j].Id;
+                            model.OutputElements[i].OutputElementId =
+                            source.OutputElements[j].OutputElementId;
                             break;
                         }
                     }
                     // если не нашли дубли, то новая запись
-                    if (model.OutputElements[i].Id == 0)
+                    if (model.OutputElements[i].OutputElementId == 0)
                     {
                         source.OutputElements.Add(new OutputElement
                         {
-                            Id = ++maxPCId,
-                            OutputId = model.Id,
+                            OutputElementId = ++maxPCId,
+                            OutputId = model.OutputId,
                             ElementId = model.OutputElements[i].ElementId,
                             Number = model.OutputElements[i].Number
                         });
@@ -254,7 +254,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
             }
             for (int i = 0; i < source.Outputs.Count; ++i)
             {
-                if (source.Outputs[i].Id == id)
+                if (source.Outputs[i].OutputId == id)
                 {
                     source.Outputs.RemoveAt(i);
                     return;

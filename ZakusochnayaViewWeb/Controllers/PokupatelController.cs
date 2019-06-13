@@ -41,7 +41,7 @@ namespace ZakusochnayaViewWeb.Controllers
             var viewModel = service.GetElement(id);
             var bindingModel = new PokupatelBindingModel
             {
-                Id = id,
+                PokupatelId = id,
                 PokupatelFIO = viewModel.PokupatelFIO
             };
             return View(bindingModel);
@@ -52,7 +52,7 @@ namespace ZakusochnayaViewWeb.Controllers
         {
             service.UpdElement(new PokupatelBindingModel
             {
-                Id = int.Parse(Request["Id"]),
+                PokupatelId = int.Parse(Request["PokupatelId"]),
                 PokupatelFIO = Request["PokupatelFIO"]
             });
             return RedirectToAction("Index");

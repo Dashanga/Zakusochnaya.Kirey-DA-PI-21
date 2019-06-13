@@ -29,7 +29,7 @@ namespace ZakusochnayaViewWeb.Controllers
 
         public ActionResult AddElement()
         {
-            var ingredients = new SelectList(ingredientService.GetList(), "Id", "ElementName");
+            var ingredients = new SelectList(ingredientService.GetList(), "ElementId", "ElementName");
             ViewBag.Elements = ingredients;
             return View();
         }
@@ -58,7 +58,7 @@ namespace ZakusochnayaViewWeb.Controllers
             {
                 outputIngredeints.Add(new OutputElementBindingModel
                 {
-                    Id = output.OutputElements[i].Id,
+                    OutputElementId = output.OutputElements[i].OutputElementId,
                     OutputId = output.OutputElements[i].OutputId,
                     ElementId = output.OutputElements[i].ElementId,
                     Number = output.OutputElements[i].Number

@@ -8,7 +8,7 @@ namespace ZakusochnayaServiceDAL.ViewModels
 {
     public class OutputViewModel
     {
-        public int Id { get; set; }
+        public int OutputId { get; set; }
         public string OutputName { get; set; }
         public decimal Cost { get; set; }
         public List<OutputElementViewModel> OutputElements { get; set; }

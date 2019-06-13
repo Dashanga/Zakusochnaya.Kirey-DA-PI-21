@@ -43,7 +43,7 @@ namespace ZakusochnayaViewWeb.Controllers
             var viewModel = service.GetElement(id);
             var bindingModel = new ElementBindingModel
             {
-                Id = id,
+                ElementId = id,
                 ElementName = viewModel.ElementName
             };
             return View(bindingModel);
@@ -55,7 +55,7 @@ namespace ZakusochnayaViewWeb.Controllers
         {
             service.UpdElement(new ElementBindingModel
             {
-                Id = int.Parse(Request["Id"]),
+                ElementId = int.Parse(Request["ElementId"]),
                 ElementName = Request["ElementName"]
             });
             return RedirectToAction("Index");

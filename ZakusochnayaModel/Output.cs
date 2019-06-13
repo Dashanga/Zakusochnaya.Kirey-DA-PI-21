@@ -11,7 +11,7 @@ namespace ZakusochnayaModel
     /// </summary>
     public class Output
     {
-        public int Id { get; set; }
+        public int OutputId { get; set; }
         public string OutputName { get; set; }
         public decimal Cost { get; set; }
     }

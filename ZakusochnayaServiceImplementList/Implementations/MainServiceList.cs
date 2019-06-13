@@ -22,7 +22,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
                 string pokuptelFIO = string.Empty;
                 for (int j = 0; j < source.Pokupatels.Count; ++j)
                 {
-                    if (source.Pokupatels[j].Id == source.Zakazs[i].PokupatelId)
+                    if (source.Pokupatels[j].PokupatelId == source.Zakazs[i].PokupatelId)
                     {
                         pokuptelFIO = source.Pokupatels[j].PokupatelFIO;
                         break;
@@ -31,7 +31,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
                 string OutputName = string.Empty;
                 for (int j = 0; j < source.Outputs.Count; ++j)
                 {
-                    if (source.Outputs[j].Id == source.Zakazs[i].OutputId)
+                    if (source.Outputs[j].OutputId == source.Zakazs[i].OutputId)
                     {
                         OutputName = source.Outputs[j].OutputName;
                         break;
@@ -39,7 +39,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
                 }
                 result.Add(new ZakazViewModel
                 {
-                    Id = source.Zakazs[i].Id,
+                    ZakazId = source.Zakazs[i].ZakazId,
                     PokupatelId = source.Zakazs[i].PokupatelId,
                     PokupatelFIO = pokuptelFIO,
                     OutputId = source.Zakazs[i].OutputId,
@@ -58,14 +58,14 @@ namespace ZakusochnayaServiceImplementList.Implementations
             int maxId = 0;
             for (int i = 0; i < source.Zakazs.Count; ++i)
             {
-                if (source.Zakazs[i].Id > maxId)
+                if (source.Zakazs[i].ZakazId > maxId)
                 {
-                    maxId = source.Pokupatels[i].Id;
+                    maxId = source.Pokupatels[i].PokupatelId;
                 }
             }
             source.Zakazs.Add(new Zakaz
             {
-                Id = maxId + 1,
+                ZakazId = maxId + 1,
                 PokupatelId = model.PokupatelId,
                 OutputId = model.OutputId,
                 DateCreate = DateTime.Now,
@@ -79,7 +79,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
             int index = -1;
             for (int i = 0; i < source.Zakazs.Count; ++i)
             {
-                if (source.Zakazs[i].Id == model.Id)
+                if (source.Zakazs[i].ZakazId == model.ZakazId)
                 {
                     index = i;
                     break;
@@ -101,7 +101,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
             int index = -1;
             for (int i = 0; i < source.Zakazs.Count; ++i)
             {
-                if (source.Pokupatels[i].Id == model.Id)
+                if (source.Pokupatels[i].PokupatelId == model.PokupatelId)
                 {
                     index = i;
                     break;
@@ -122,7 +122,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
             int index = -1;
             for (int i = 0; i < source.Zakazs.Count; ++i)
             {
-                if (source.Pokupatels[i].Id == model.Id)
+                if (source.Pokupatels[i].PokupatelId == model.PokupatelId)
                 {
                     index = i;
                     break;

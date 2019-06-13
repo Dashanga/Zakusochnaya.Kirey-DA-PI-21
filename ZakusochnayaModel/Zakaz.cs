@@ -11,7 +11,7 @@ namespace ZakusochnayaModel
     /// </summary>
     public class Zakaz
     {
-        public int Id { get; set; }
+        public int ZakazId { get; set; }
         public int PokupatelId { get; set; }
         public int OutputId { get; set; }
         public int Number { get; set; }

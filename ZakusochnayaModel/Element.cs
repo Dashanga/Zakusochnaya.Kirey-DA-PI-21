@@ -11,7 +11,7 @@ namespace ZakusochnayaModel
     /// </summary>
     public class Element
     {
-        public int Id { get; set; }
+        public int ElementId { get; set; }
         public string ElementName { get; set; }
     }
 }

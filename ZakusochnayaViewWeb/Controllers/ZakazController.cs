@@ -28,8 +28,8 @@ namespace ZakusochnayaViewWeb.Controllers
 
         public ActionResult Create()
         {
-            var outputs = new SelectList(outputService.GetList(), "Id", "OutputName");
-            var pokupatels = new SelectList(pokupatelService.GetList(), "Id", "PokupatelFIO");
+            var outputs = new SelectList(outputService.GetList(), "OutputId", "OutputName");
+            var pokupatels = new SelectList(pokupatelService.GetList(), "PokupatelId", "PokupatelFIO");
             ViewBag.Outputs = outputs;
             ViewBag.Pokupatels = pokupatels;
             return View();
@@ -67,13 +67,13 @@ namespace ZakusochnayaViewWeb.Controllers
                 switch (status)
                 {
                     case "Processing":
-                        mainService.TakeOrderInWork(new ZakazBindingModel { Id = id });
+                        mainService.TakeOrderInWork(new ZakazBindingModel { ZakazId = id });
                         break;
                     case "Ready":
-                        mainService.FinishOrder(new ZakazBindingModel { Id = id });
+                        mainService.FinishOrder(new ZakazBindingModel { ZakazId = id });
                         break;
                     case "Paid":
-                        mainService.PayOrder(new ZakazBindingModel { Id = id });
+                        mainService.PayOrder(new ZakazBindingModel { ZakazId = id });
                         break;
                 }
             }
