@@ -101,7 +101,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
             int index = -1;
             for (int i = 0; i < source.Zakazs.Count; ++i)
             {
-                if (source.Pokupatels[i].PokupatelId == model.PokupatelId)
+                if (source.Zakazs[i].ZakazId == model.ZakazId)
                 {
                     index = i;
                     break;
@@ -122,7 +122,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
             int index = -1;
             for (int i = 0; i < source.Zakazs.Count; ++i)
             {
-                if (source.Pokupatels[i].PokupatelId == model.PokupatelId)
+                if (source.Zakazs[i].ZakazId == model.ZakazId)
                 {
                     index = i;
                     break;

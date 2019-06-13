@@ -19,14 +19,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PokupatelId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("PokupatelFIO", ViewBag.Pokupatels as SelectList)
+                @Html.DropDownList("PokupatelId", ViewBag.Pokupatels as SelectList)
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.OutputId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("OutputName", ViewBag.Outputs as SelectList)
+                @Html.DropDownList("OutputId", ViewBag.Outputs as SelectList)
             </div>
         </div>
 
