@@ -43,7 +43,6 @@
     <Compile Include="Implementations\PokupatelServiceList.cs" />
     <Compile Include="Implementations\ElementServiceList.cs" />
     <Compile Include="Implementations\MainServiceList.cs" />
-    <Compile Include="Implementations\OutputElementServiceList.cs" />
     <Compile Include="Implementations\OutputServiceList.cs" />
     <Compile Include="Implementations\SkladServiceList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
