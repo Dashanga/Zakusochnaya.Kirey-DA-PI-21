@@ -10,6 +10,7 @@ namespace ZakusochnayaServiceDAL.ViewModel
     {
         public int Id { get; set; }
         public int SkladId { get; set; }
+        public string SkladName { get; set; }
         public int ElementId { get; set; }
         public string ElementName { get; set; }
         public int Number { get; set; }
