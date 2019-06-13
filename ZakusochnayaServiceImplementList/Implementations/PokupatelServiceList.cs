@@ -22,7 +22,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
             {
                 result.Add(new PokupatelViewModel
                 {
-                    PokupatelId = source.Pokupatels[i].PokupatelId,
+                    Id = source.Pokupatels[i].Id,
                     PokupatelFIO = source.Pokupatels[i].PokupatelFIO
                 });
             }
@@ -32,11 +32,11 @@ namespace ZakusochnayaServiceImplementList.Implementations
         {
             for (int i = 0; i < source.Pokupatels.Count; ++i)
             {
-                if (source.Pokupatels[i].PokupatelId == id)
+                if (source.Pokupatels[i].Id == id)
                 {
                     return new PokupatelViewModel
                     {
-                        PokupatelId = source.Pokupatels[i].PokupatelId,
+                        Id = source.Pokupatels[i].Id,
                         PokupatelFIO = source.Pokupatels[i].PokupatelFIO
                     };
                 }
@@ -48,9 +48,9 @@ namespace ZakusochnayaServiceImplementList.Implementations
             int maxId = 0;
             for (int i = 0; i < source.Pokupatels.Count; ++i)
             {
-                if (source.Pokupatels[i].PokupatelId > maxId)
+                if (source.Pokupatels[i].Id > maxId)
                 {
-                    maxId = source.Pokupatels[i].PokupatelId;
+                    maxId = source.Pokupatels[i].Id;
                 }
                 if (source.Pokupatels[i].PokupatelFIO == model.PokupatelFIO)
                 {
@@ -59,7 +59,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
             }
             source.Pokupatels.Add(new Pokupatel
             {
-                PokupatelId = maxId + 1,
+                Id = maxId + 1,
                 PokupatelFIO = model.PokupatelFIO
             });
         }
@@ -68,12 +68,12 @@ namespace ZakusochnayaServiceImplementList.Implementations
             int index = -1;
             for (int i = 0; i < source.Pokupatels.Count; ++i)
             {
-                if (source.Pokupatels[i].PokupatelId == model.PokupatelId)
+                if (source.Pokupatels[i].Id == model.Id)
                 {
                     index = i;
                 }
                 if (source.Pokupatels[i].PokupatelFIO == model.PokupatelFIO &&
-                source.Pokupatels[i].PokupatelId != model.PokupatelId)
+                source.Pokupatels[i].Id != model.Id)
                 {
                     throw new Exception("Уже есть клиент с таким ФИО");
                 }
@@ -88,7 +88,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
         {
             for (int i = 0; i < source.Pokupatels.Count; ++i)
             {
-                if (source.Pokupatels[i].PokupatelId == id)
+                if (source.Pokupatels[i].Id == id)
                 {
                     source.Pokupatels.RemoveAt(i);
                     return;

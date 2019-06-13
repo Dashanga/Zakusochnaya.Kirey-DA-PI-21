@@ -48,9 +48,9 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.ActionLink("Отдать на выполнение", "SetStatus", new { id=item.ZakazId, status = "Processing" }) |
-            @Html.ActionLink("Заказ готов", "SetStatus", new { id = item.ZakazId, status = "Ready" }) |
-            @Html.ActionLink("Заказ оплачен", "SetStatus", new { id = item.ZakazId, status = "Paid" })
+            @Html.ActionLink("Отдать на выполнение", "SetStatus", new { id=item.Id, status = "Processing" }) |
+            @Html.ActionLink("Заказ готов", "SetStatus", new { id = item.Id, status = "Ready" }) |
+            @Html.ActionLink("Заказ оплачен", "SetStatus", new { id = item.Id, status = "Paid" })
         </td>
     </tr>
 }

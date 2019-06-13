@@ -8,7 +8,7 @@ namespace ZakusochnayaServiceDAL.BindingModel
 {
     public class ElementBindingModel
     {
-        public int ElementId { get; set; }
+        public int Id { get; set; }
         public string ElementName { get; set; }
     }
 }

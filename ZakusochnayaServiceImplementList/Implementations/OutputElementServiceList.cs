@@ -24,7 +24,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
             {
                 result.Add(new OutputElementViewModel
                 {
-                    OutputElementId = source.OutputElements[i].OutputElementId,
+                    Id = source.OutputElements[i].Id,
                     OutputId = source.OutputElements[i].OutputId,
                     ElementId = source.OutputElements[i].ElementId,
                     Number = source.OutputElements[i].Number
@@ -36,11 +36,11 @@ namespace ZakusochnayaServiceImplementList.Implementations
         {
             for (int i = 0; i < source.OutputElements.Count; ++i)
             {
-                if (source.OutputElements[i].OutputElementId == id)
+                if (source.OutputElements[i].Id == id)
                 {
                     return new OutputElementViewModel
                     {
-                        OutputElementId = source.OutputElements[i].OutputElementId,
+                        Id = source.OutputElements[i].Id,
                         OutputId = source.OutputElements[i].OutputId,
                         ElementId = source.OutputElements[i].ElementId,
                         Number = source.OutputElements[i].Number
@@ -54,9 +54,9 @@ namespace ZakusochnayaServiceImplementList.Implementations
             int maxId = 0;
             for (int i = 0; i < source.OutputElements.Count; ++i)
             {
-                if (source.OutputElements[i].OutputElementId > maxId)
+                if (source.OutputElements[i].Id > maxId)
                 {
-                    maxId = source.OutputElements[i].OutputElementId;
+                    maxId = source.OutputElements[i].Id;
                 }
                 if (source.OutputElements[i].OutputId == model.OutputId &&
                     source.OutputElements[i].ElementId == model.ElementId &&
@@ -67,7 +67,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
             }
             source.OutputElements.Add(new OutputElement
             {
-                OutputElementId = maxId + 1,
+                Id = maxId + 1,
                 OutputId = model.OutputId,
                 ElementId = model.ElementId,
                 Number = model.Number
@@ -78,14 +78,14 @@ namespace ZakusochnayaServiceImplementList.Implementations
             int index = -1;
             for (int i = 0; i < source.OutputElements.Count; ++i)
             {
-                if (source.OutputElements[i].OutputElementId == model.OutputElementId)
+                if (source.OutputElements[i].Id == model.Id)
                 {
                     index = i;
                 }
                 if (source.OutputElements[i].OutputId == model.OutputId &&
                   source.OutputElements[i].ElementId == model.ElementId &&
                         source.OutputElements[i].Number == model.Number &&
-                    source.OutputElements[i].OutputElementId != model.OutputElementId)
+                    source.OutputElements[i].Id != model.Id)
                 {
                     throw new Exception("Уже существует!");
                 }
@@ -102,7 +102,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
         {
             for (int i = 0; i < source.OutputElements.Count; ++i)
             {
-                if (source.OutputElements[i].OutputElementId == id)
+                if (source.OutputElements[i].Id == id)
                 {
                     source.OutputElements.RemoveAt(i);
                     return;

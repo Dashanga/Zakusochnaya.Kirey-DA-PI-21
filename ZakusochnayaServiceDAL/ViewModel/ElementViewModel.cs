@@ -8,7 +8,7 @@ namespace ZakusochnayaServiceDAL.ViewModel
 {
     public class ElementViewModel
     {
-        public int ElementId { get; set; }
+        public int Id { get; set; }
         public string ElementName { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace ZakusochnayaModel
     /// </summary>
     public class Pokupatel
     {
-        public int PokupatelId { get; set; }
+        public int Id { get; set; }
         public string PokupatelFIO { get; set; }
     }
 }

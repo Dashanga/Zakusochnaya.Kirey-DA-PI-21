@@ -22,7 +22,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
             {
                 result.Add(new ElementViewModel
                 {
-                    ElementId = source.Elements[i].ElementId,
+                    Id = source.Elements[i].Id,
                     ElementName = source.Elements[i].ElementName
                 });
             }
@@ -32,11 +32,11 @@ namespace ZakusochnayaServiceImplementList.Implementations
         {
             for (int i = 0; i < source.Elements.Count; ++i)
             {
-                if (source.Elements[i].ElementId == id)
+                if (source.Elements[i].Id == id)
                 {
                     return new ElementViewModel
                     {
-                        ElementId = source.Elements[i].ElementId,
+                        Id = source.Elements[i].Id,
                         ElementName = source.Elements[i].ElementName
                     };
                 }
@@ -48,9 +48,9 @@ namespace ZakusochnayaServiceImplementList.Implementations
             int maxId = 0;
             for (int i = 0; i < source.Elements.Count; ++i)
             {
-                if (source.Elements[i].ElementId > maxId)
+                if (source.Elements[i].Id > maxId)
                 {
-                    maxId = source.Elements[i].ElementId;
+                    maxId = source.Elements[i].Id;
                 }
                 if (source.Elements[i].ElementName == model.ElementName)
                 {
@@ -59,7 +59,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
             }
             source.Elements.Add(new Element
             {
-                ElementId = maxId + 1,
+                Id = maxId + 1,
                 ElementName = model.ElementName
             });
         }
@@ -68,12 +68,12 @@ namespace ZakusochnayaServiceImplementList.Implementations
             int index = -1;
             for (int i = 0; i < source.Elements.Count; ++i)
             {
-                if (source.Elements[i].ElementId == model.ElementId)
+                if (source.Elements[i].Id == model.Id)
                 {
                     index = i;
                 }
                 if (source.Elements[i].ElementName == model.ElementName &&
-                source.Elements[i].ElementId != model.ElementId)
+                source.Elements[i].Id != model.Id)
                 {
                     throw new Exception("Уже есть компонент с таким названием");
                 }
@@ -88,7 +88,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
         {
             for (int i = 0; i < source.Elements.Count; ++i)
             {
-                if (source.Elements[i].ElementId == id)
+                if (source.Elements[i].Id == id)
                 {
                     source.Elements.RemoveAt(i);
                     return;
