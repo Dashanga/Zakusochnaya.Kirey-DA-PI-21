@@ -67,6 +67,7 @@ namespace ZakusochnayaServiceImplementDataBase.Implementations
             {
                 PokupatelId = model.PokupatelId,
                 OutputId = model.OutputId,
+                ExecutorId = model.ExecutorId,
                 DateCreate = DateTime.Now,
                 Number = model.Number,
                 Summa = model.Summa,
@@ -75,7 +76,9 @@ namespace ZakusochnayaServiceImplementDataBase.Implementations
             context.Zakazs.Add(order);
             context.SaveChanges();
             var client = context.Pokupatels.FirstOrDefault(x => x.Id == model.PokupatelId);
-            SendEmail(client.Mail, "Оповещение по заказам", string.Format("Заказ №{0} от { 1} создан успешно", order.Id, order.DateCreate.ToShortDateString()));
+            //throw new Exception(client.Mail);
+            SendEmail(client.Mail, "Оповещение по заказам", string.Format("Заказ №{0} от {1} создан успешно", order.Id, order.DateCreate.ToShortDateString()));
+            
         }
         public void TakeOrderInWork(ZakazBindingModel model)
         {
@@ -225,4 +228,4 @@ namespace ZakusochnayaServiceImplementDataBase.Implementations
             }
         }
     }
-}
+}

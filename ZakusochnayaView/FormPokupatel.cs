@@ -55,9 +55,7 @@ APIClient.GetRequest<PokupatelViewModel>("api/Pokupatel/Get/" + id.Value);
             string mail = textBoxMail.Text;
             if (!string.IsNullOrEmpty(mail))
             {
-                if (!Regex.IsMatch(mail, @"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-
-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9az][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$"))
-                {
+                if (!Regex.IsMatch(mail, @"(\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)")) {
                     MessageBox.Show("Неверный формат для электронной почты", "Ошибка",
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -66,7 +64,7 @@ APIClient.GetRequest<PokupatelViewModel>("api/Pokupatel/Get/" + id.Value);
             if (id.HasValue)
             {
                 APIClient.PostRequest<PokupatelBindingModel,
-               bool>("api/Element/UpdElement", new PokupatelBindingModel
+               bool>("api/Pokupatel/UpdElement", new PokupatelBindingModel
                {
                    Id = id.Value,
                    PokupatelFIO = fio,
@@ -76,7 +74,7 @@ APIClient.GetRequest<PokupatelViewModel>("api/Pokupatel/Get/" + id.Value);
             else
             {
                 APIClient.PostRequest<PokupatelBindingModel,
-               bool>("api/Element/AddElement", new PokupatelBindingModel
+               bool>("api/Pokupatel/AddElement", new PokupatelBindingModel
                {
                    PokupatelFIO = fio,
                    Mail = mail

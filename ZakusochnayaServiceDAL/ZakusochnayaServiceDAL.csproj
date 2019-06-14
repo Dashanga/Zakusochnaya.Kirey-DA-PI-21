@@ -50,7 +50,6 @@
     <Compile Include="BindingModel\ElementBindingModel.cs" />
     <Compile Include="BindingModel\SkladBindingModel.cs" />
     <Compile Include="BindingModel\SkladElementBindingModel.cs" />
-    <Compile Include="BindingModel\ZakazStatusBindingModel.cs" />
     <Compile Include="BindingModel\OutputElementBindingModel.cs" />
     <Compile Include="Interfaces\IExecutorService.cs" />
     <Compile Include="Interfaces\IMessageInfoService.cs" />
