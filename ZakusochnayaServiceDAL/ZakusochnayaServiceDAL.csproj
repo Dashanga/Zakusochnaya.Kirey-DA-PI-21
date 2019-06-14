@@ -46,14 +46,12 @@
     <Compile Include="BindingModel\ElementBindingModel.cs" />
     <Compile Include="BindingModel\SkladBindingModel.cs" />
     <Compile Include="BindingModel\SkladElementBindingModel.cs" />
-    <Compile Include="BindingModel\ZakazStatusBindingModel.cs" />
     <Compile Include="BindingModel\OutputElementBindingModel.cs" />
     <Compile Include="Interfaces\IOtchetService.cs" />
     <Compile Include="Interfaces\IPokupatelService.cs" />
     <Compile Include="BindingModel\ZakazBindingModel.cs" />
     <Compile Include="Interfaces\IElementService.cs" />
     <Compile Include="Interfaces\IMainService.cs" />
-    <Compile Include="Interfaces\IOutputElementService.cs" />
     <Compile Include="Interfaces\IOutputService.cs" />
     <Compile Include="Interfaces\ISkladService.cs" />
     <Compile Include="ViewModel\PokupatelViewModel.cs" />
