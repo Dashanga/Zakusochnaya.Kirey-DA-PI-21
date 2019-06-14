@@ -54,7 +54,6 @@
     <Compile Include="Interfaces\IExecutorService.cs" />
     <Compile Include="Interfaces\IMessageInfoService.cs" />
     <Compile Include="Interfaces\IOtchetService.cs" />
-    <Compile Include="Interfaces\IOutputElementService.cs" />
     <Compile Include="Interfaces\IPokupatelService.cs" />
     <Compile Include="BindingModel\ZakazBindingModel.cs" />
     <Compile Include="Interfaces\IElementService.cs" />
