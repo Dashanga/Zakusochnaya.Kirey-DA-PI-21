@@ -159,7 +159,6 @@
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\OtchetController.cs" />
     <Compile Include="Controllers\OutputController.cs" />
-    <Compile Include="Controllers\OutputElementController.cs" />
     <Compile Include="Controllers\PokupatelController.cs" />
     <Compile Include="Controllers\SkladController.cs" />
     <Compile Include="Global.asax.cs">
