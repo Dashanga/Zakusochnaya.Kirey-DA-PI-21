@@ -227,6 +227,10 @@
       <Project>{ed3030ba-8284-4b11-b33b-4507892afa5c}</Project>
       <Name>ZakusochnayaServiceDAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ZakusochnayaServiceImplementDataBase\ZakusochnayaServiceImplementDataBase.csproj">
+      <Project>{05f48998-11ae-4476-a527-75f6e7e36d28}</Project>
+      <Name>ZakusochnayaServiceImplementDataBase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ZakusochnayaServiceImplementList\ZakusochnayaServiceImplement.csproj">
       <Project>{a498405d-0800-4d21-961b-0801c431144a}</Project>
       <Name>ZakusochnayaServiceImplement</Name>
