@@ -58,6 +58,8 @@ namespace ZakusochnayaRestApi
             HierarchicalLifetimeManager());
             container.RegisterType<IOtchetService, OtchetServiceDB>(new
             HierarchicalLifetimeManager());
+            container.RegisterType<IExecutorService, ExecutorServiceDB>(new
+            HierarchicalLifetimeManager());
         }
     }
 }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using ZakusochnayaServiceDAL.BindingModel;
+using System.Diagnostics;
 //using Unity.Attributes;
 
 namespace ZakusochnayaView
@@ -19,7 +20,8 @@ namespace ZakusochnayaView
         {
             try
             {
-                List<ZakazViewModel> list = APIClient.GetRequest<List<ZakazViewModel>>("api/Main/GetList");
+                List<ZakazViewModel> list =
+               APIClient.GetRequest<List<ZakazViewModel>>("api/Main/GetList");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -27,13 +29,14 @@ namespace ZakusochnayaView
                     dataGridView.Columns[1].Visible = false;
                     dataGridView.Columns[3].Visible = false;
                     dataGridView.Columns[5].Visible = false;
-                    dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[1].AutoSizeMode =
+                    DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
+               MessageBoxIcon.Error);
             }
         }
         private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
@@ -56,6 +59,11 @@ namespace ZakusochnayaView
             var form = new FormSklads();
             form.ShowDialog();
         }
+        private void сотрудникиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new FormExecutors();
+            form.ShowDialog();
+        }
         private void пополнитьСкладToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new FormPutOnSklad();
@@ -67,66 +75,31 @@ namespace ZakusochnayaView
             form.ShowDialog();
             LoadData();
         }
-
-        private void buttonTakeOrderInWork_Click_1(object sender, EventArgs e)
+        private void buttonPayOrder_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
                 int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 try
                 {
-                    APIClient.PostRequest<ZakazBindingModel, bool>("api/Main/TakeZakazInWork", new ZakazBindingModel { Id = id });
+                    APIClient.PostRequest<ZakazBindingModel, bool>("api/Main/PayOrder",
+                   new ZakazBindingModel
+                   {
+                       Id = id
+                   });
                     LoadData();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                   MessageBoxIcon.Error);
                 }
             }
         }
-
-        private void buttonOrderReady_Click_1(object sender, EventArgs e)
-        {
-            if (dataGridView.SelectedRows.Count == 1)
-            {
-                int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
-                try
-                {
-                    APIClient.PostRequest<ZakazBindingModel, bool>("api/Main/FinishOrder", new ZakazBindingModel { Id = id });
-                    LoadData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void buttonPayOrder_Click_1(object sender, EventArgs e)
-        {
-            if (dataGridView.SelectedRows.Count == 1)
-            {
-                int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
-                try
-                {
-                    APIClient.PostRequest<ZakazBindingModel, bool>("api/Main/.PayZakaz", new ZakazBindingModel { Id = id });
-                    LoadData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void buttonRef_Click_1(object sender, EventArgs e)
+        private void buttonRef_Click(object sender, EventArgs e)
         {
             LoadData();
         }
-
         private void прайсИзделийToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog
@@ -137,31 +110,46 @@ namespace ZakusochnayaView
             {
                 try
                 {
-                    APIClient.PostRequest<OtchetBindingModel, bool>("api/Otchet/SaveProductPrice", new OtchetBindingModel
-                        {
-                            FileName = sfd.FileName
-                        });
+                    APIClient.PostRequest<OtchetBindingModel,
+                   bool>("api/Report/SaveProductPrice", new OtchetBindingModel
+                   {
+                       FileName = sfd.FileName
+                   });
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                        MessageBoxIcon.Error);
                 }
             }
         }
-
-        private void загруженностьСкладовToolStripMenuItem_Click(object sender, EventArgs e)
+        private void загруженностьСкладовToolStripMenuItem_Click(object sender, EventArgs
+       e)
         {
             var form = new FormSkladsLoad();
             form.ShowDialog();
         }
-
         private void заказыКлиентовToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new FormPokupatelZakazs();
             form.ShowDialog();
+        }
+      
+        private void запускРаботToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                APIClient.PostRequest<int?, bool>("api/Main/StartWork", null);
+                MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+               MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+               MessageBoxIcon.Error);
+            }
         }
     }
 }

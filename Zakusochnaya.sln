@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZakusochnayaModel", "ZakusochnayaModel\ZakusochnayaModel.csproj", "{602E31E3-B4CB-4B93-AF52-F5AD5662B6A2}"
 EndProject
@@ -10,6 +10,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZakusochnayaServiceDAL", "ZakusochnayaServiceDAL\ZakusochnayaServiceDAL.csproj", "{ED3030BA-8284-4B11-B33B-4507892AFA5C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZakusochnayaView", "ZakusochnayaView\ZakusochnayaView.csproj", "{C97DAF81-A49E-44CB-8D97-70BC97AF3CF7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{201C6CFA-1AF7-44E9-9692-3D030F5CAB3F} = {201C6CFA-1AF7-44E9-9692-3D030F5CAB3F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZakusochnayaServiceImplementDataBase", "ZakusochnayaServiceImplementDataBase\ZakusochnayaServiceImplementDataBase.csproj", "{05F48998-11AE-4476-A527-75F6E7E36D28}"
 EndProject

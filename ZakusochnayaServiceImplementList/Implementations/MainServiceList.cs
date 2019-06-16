@@ -37,6 +37,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
                 .ToList();
             return result;
         }
+        
         public void CreateOrder(ZakazBindingModel model)
         {
             int maxId = source.Zakazs.Count > 0 ? source.Zakazs.Max(rec => rec.Id) : 0;
@@ -130,7 +131,7 @@ namespace ZakusochnayaServiceImplementList.Implementations
             }
             element.Status = ZakazStatus.Оплачен;
         }
-        public void PutComponentOnStock(SkladElementBindingModel model)
+        public void PutComponentOnSklad(SkladElementBindingModel model)
         {
             SkladElement element = source.SkladElements.FirstOrDefault(rec =>
             rec.SkladId == model.SkladId && rec.ElementId == model.ElementId);
@@ -150,6 +151,11 @@ namespace ZakusochnayaServiceImplementList.Implementations
                     Number = model.Number
                 });
             }
+        }
+
+        public List<ZakazViewModel> GetFreeOrders()
+        {
+            throw new NotImplementedException();
         }
     }
 }

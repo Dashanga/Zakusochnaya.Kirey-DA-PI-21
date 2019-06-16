@@ -5,10 +5,10 @@ using ZakusochnayaServiceDAL.Interfaces;
 
 namespace ZakusochnayaRestApi.Controllers
 {
-    public class ElementController : ApiController
+    public class ExecutorController : ApiController
     {
-        private readonly IElementService _service;
-        public ElementController(IElementService service)
+        private readonly IExecutorService _service;
+        public ExecutorController(IExecutorService service)
         {
             _service = service;
         }
@@ -33,19 +33,20 @@ namespace ZakusochnayaRestApi.Controllers
             return Ok(element);
         }
         [HttpPost]
-        public void AddElement(ElementBindingModel model)
+        public void AddElement(ExecutorBindingModel model)
         {
             _service.AddElement(model);
         }
         [HttpPost]
-        public void UpdElement(ElementBindingModel model)
+        public void UpdElement(ExecutorBindingModel model)
         {
             _service.UpdElement(model);
         }
         [HttpPost]
-        public void DelElement(ElementBindingModel model)
+        public void DelElement(ExecutorBindingModel model)
         {
             _service.DelElement(model.Id);
         }
+
     }
 }
