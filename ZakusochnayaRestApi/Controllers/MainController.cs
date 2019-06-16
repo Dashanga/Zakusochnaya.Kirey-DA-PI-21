@@ -8,7 +8,6 @@ using ZakusochnayaServiceDAL.ViewModel;
 using ZakusochnayaRestApi.Services;
 using System.Collections.Generic;
 using System.Diagnostics;
-//http://localhost:49622/api/Main/GetInfo
 
 namespace ZakusochnayaRestApi.Controllers
 {
