@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
 using ZakusochnayaServiceDAL.ViewModel;
+using ZakusochnayaServiceDAL.BindingModel;
+using ZakusochnayaServiceImplementDataBase.Implementations;
 //using Unity.Attributes;
 
 namespace ZakusochnayaView
@@ -15,10 +17,12 @@ namespace ZakusochnayaView
         [Dependency]
         public new IUnityContainer Container { get; set; }
         private readonly IMainService service;
-        public FormMain(IMainService service)
+        private readonly IOtchetService reportService;
+        public FormMain(IMainService service, IOtchetService reportService)
         {
             InitializeComponent();
             this.service = service;
+            this.reportService = reportService;
         }
         private void LoadData()
         {
@@ -133,6 +137,43 @@ namespace ZakusochnayaView
         private void buttonRef_Click_1(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void прайсИзделийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter = "doc|*.doc|docx|*.docx"
+            };
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    reportService.SaveProductPrice(new OtchetBindingModel
+                    {
+                        FileName = sfd.FileName
+                    });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void загруженностьСкладовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormSkladsLoad>();
+            form.ShowDialog();
+        }
+
+        private void заказыКлиентовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormPokupatelZakazs>();
+            form.ShowDialog();
         }
     }
 }

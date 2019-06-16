@@ -35,6 +35,8 @@ namespace ZakusochnayaView
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IOutputService, OutputServiceDB>(new
             HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IOtchetService, OtchetServiceDB>(new
+            HierarchicalLifetimeManager());
             currentContainer.RegisterType<ISkladService, SkladServiceDB>(new
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IMainService, MainServiceDB>(new
