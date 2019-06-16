@@ -12,7 +12,10 @@ namespace ZakusochnayaModel
         public int Id { get; set; }
         [Required]
         public string PokupatelFIO { get; set; }
+        public string Mail { get; set; }
         [ForeignKey("PokupatelId")]
         public virtual List<Zakaz> Zakazs { get; set; }
+        [ForeignKey("PokupatelId")]
+        public virtual List<MessageInfo> MessageInfos { get; set; }
     }
 }

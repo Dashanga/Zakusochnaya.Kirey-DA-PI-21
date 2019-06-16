@@ -105,6 +105,12 @@
     <Compile Include="FormExecutors.Designer.cs">
       <DependentUpon>FormExecutors.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormMails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMails.Designer.cs">
+      <DependentUpon>FormMails.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormPokupatel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +195,7 @@
     <Compile Include="FormPokupatelZakazs.Designer.cs">
       <DependentUpon>FormPokupatelZakazs.cs</DependentUpon>
     </Compile>
+    <Compile Include="MailClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormExecutor.resx">
@@ -196,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormExecutors.resx">
       <DependentUpon>FormExecutors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMails.resx">
+      <DependentUpon>FormMails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPokupatel.resx">
       <DependentUpon>FormPokupatel.cs</DependentUpon>

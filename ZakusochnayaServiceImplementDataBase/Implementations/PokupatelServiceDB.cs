@@ -18,10 +18,11 @@ namespace ZakusochnayaServiceImplementDataBase
         public List<PokupatelViewModel> GetList()
         {
             List<PokupatelViewModel> result = context.Pokupatels.Select(rec => new
-            PokupatelViewModel
+           PokupatelViewModel
             {
                 Id = rec.Id,
-                PokupatelFIO = rec.PokupatelFIO
+                PokupatelFIO = rec.PokupatelFIO,
+                Mail = rec.Mail
             })
             .ToList();
             return result;
@@ -34,7 +35,18 @@ namespace ZakusochnayaServiceImplementDataBase
                 return new PokupatelViewModel
                 {
                     Id = element.Id,
-                    PokupatelFIO = element.PokupatelFIO
+                    PokupatelFIO = element.PokupatelFIO,
+                    Mail = element.Mail,
+                    Messages = context.MessageInfos
+                .Where(recM => recM.PokupatelId == element.Id)
+               .Select(recM => new MessageInfoViewModel
+               {
+                   MessageId = recM.MessageId,
+                   DateDelivery = recM.DateDelivery,
+                   Subject = recM.Subject,
+                   Body = recM.Body
+               })
+               .ToList()
                 };
             }
             throw new Exception("Элемент не найден");
@@ -42,21 +54,22 @@ namespace ZakusochnayaServiceImplementDataBase
         public void AddElement(PokupatelBindingModel model)
         {
             Pokupatel element = context.Pokupatels.FirstOrDefault(rec => rec.PokupatelFIO ==
-            model.PokupatelFIO);
+           model.PokupatelFIO);
             if (element != null)
             {
                 throw new Exception("Уже есть клиент с таким ФИО");
             }
             context.Pokupatels.Add(new Pokupatel
             {
-                PokupatelFIO = model.PokupatelFIO
+                PokupatelFIO = model.PokupatelFIO,
+                Mail = model.Mail
             });
             context.SaveChanges();
         }
         public void UpdElement(PokupatelBindingModel model)
         {
             Pokupatel element = context.Pokupatels.FirstOrDefault(rec => rec.PokupatelFIO ==
-            model.PokupatelFIO && rec.Id != model.Id);
+           model.PokupatelFIO && rec.Id != model.Id);
             if (element != null)
             {
                 throw new Exception("Уже есть клиент с таким ФИО");
@@ -67,6 +80,7 @@ namespace ZakusochnayaServiceImplementDataBase
                 throw new Exception("Элемент не найден");
             }
             element.PokupatelFIO = model.PokupatelFIO;
+            element.Mail = model.Mail;
             context.SaveChanges();
         }
         public void DelElement(int id)
@@ -83,4 +97,4 @@ namespace ZakusochnayaServiceImplementDataBase
             }
         }
     }
-}
+}

@@ -52,6 +52,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -64,6 +65,7 @@
     <Compile Include="Implementations\ElementServiceDB.cs" />
     <Compile Include="Implementations\ExecutorServiceDB.cs" />
     <Compile Include="Implementations\MainServiceDB.cs" />
+    <Compile Include="Implementations\MessageInfoServiceDB.cs" />
     <Compile Include="Implementations\OtchetServiceDB.cs" />
     <Compile Include="Implementations\OutputServiceDB.cs" />
     <Compile Include="Implementations\SkladServiceDB.cs" />
@@ -76,9 +78,13 @@
     <Compile Include="Migrations\201905061023364_SecondMigration.Designer.cs">
       <DependentUpon>201905061023364_SecondMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905301134563_NewMigration.cs" />
-    <Compile Include="Migrations\201905301134563_NewMigration.Designer.cs">
-      <DependentUpon>201905301134563_NewMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201905292137259_ThirdMigration.cs" />
+    <Compile Include="Migrations\201905292137259_ThirdMigration.Designer.cs">
+      <DependentUpon>201905292137259_ThirdMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905301211416_NovayaMigration.cs" />
+    <Compile Include="Migrations\201905301211416_NovayaMigration.Designer.cs">
+      <DependentUpon>201905301211416_NovayaMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -111,8 +117,11 @@
     <EmbeddedResource Include="Migrations\201905061023364_SecondMigration.resx">
       <DependentUpon>201905061023364_SecondMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905301134563_NewMigration.resx">
-      <DependentUpon>201905301134563_NewMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905292137259_ThirdMigration.resx">
+      <DependentUpon>201905292137259_ThirdMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905301211416_NovayaMigration.resx">
+      <DependentUpon>201905301211416_NovayaMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
