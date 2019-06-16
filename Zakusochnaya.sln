@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZakusochnayaServiceDAL", "Z
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZakusochnayaView", "ZakusochnayaView\ZakusochnayaView.csproj", "{C97DAF81-A49E-44CB-8D97-70BC97AF3CF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZakusochnayaServiceImplementDataBase", "ZakusochnayaServiceImplementDataBase\ZakusochnayaServiceImplementDataBase.csproj", "{05F48998-11AE-4476-A527-75F6E7E36D28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C97DAF81-A49E-44CB-8D97-70BC97AF3CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C97DAF81-A49E-44CB-8D97-70BC97AF3CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C97DAF81-A49E-44CB-8D97-70BC97AF3CF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05F48998-11AE-4476-A527-75F6E7E36D28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05F48998-11AE-4476-A527-75F6E7E36D28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05F48998-11AE-4476-A527-75F6E7E36D28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05F48998-11AE-4476-A527-75F6E7E36D28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

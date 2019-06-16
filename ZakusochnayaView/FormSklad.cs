@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
 using ZakusochnayaServiceDAL;
 using ZakusochnayaServiceDAL.BindingModel;
 using ZakusochnayaServiceDAL.Interfaces;
 using ZakusochnayaServiceDAL.ViewModel;
+using ZakusochnayaServiceDAL.ViewModels;
 
 namespace ZakusochnayaView
 {
@@ -15,6 +17,8 @@ namespace ZakusochnayaView
         public int Id { set { id = value; } }
         private readonly ISkladService service;
         private int? id;
+
+        private List<SkladElementViewModel> productComponents;
         public FormSklad(ISkladService service)
         {
             InitializeComponent();
@@ -30,12 +34,8 @@ namespace ZakusochnayaView
                     if (view != null)
                     {
                         textBoxName.Text = view.SkladName;
-                        dataGridView.DataSource = view.SkladElements;
-                        dataGridView.Columns[0].Visible = false;
-                        dataGridView.Columns[1].Visible = false;
-                        dataGridView.Columns[2].Visible = false;
-                        dataGridView.Columns[3].AutoSizeMode =
-                        DataGridViewAutoSizeColumnMode.Fill;
+                        productComponents = view.SkladElements;
+                        LoadData();
                     }
                 }
                 catch (Exception ex)
@@ -43,6 +43,32 @@ namespace ZakusochnayaView
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 }
+            }
+            else
+            {
+                productComponents = new List<SkladElementViewModel>();
+            }
+        }
+
+        private void LoadData()
+        {
+            try
+            {
+                if (productComponents != null)
+                {
+                    dataGridView.DataSource = null;
+                    dataGridView.DataSource = productComponents;
+                    dataGridView.Columns[0].Visible = false;
+                    dataGridView.Columns[1].Visible = false;
+                    dataGridView.Columns[2].Visible = false;
+                    dataGridView.Columns[3].AutoSizeMode =
+                    DataGridViewAutoSizeColumnMode.Fill;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
             }
         }
         private void buttonSave_Click(object sender, EventArgs e)
