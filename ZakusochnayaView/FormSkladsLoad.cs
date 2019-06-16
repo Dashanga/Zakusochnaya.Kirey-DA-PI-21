@@ -1,26 +1,22 @@
 ﻿using ZakusochnayaServiceDAL.BindingModel;
-using ZakusochnayaServiceDAL.Interfaces;
 using System;
 using System.Windows.Forms;
-using Unity;
+using ZakusochnayaServiceDAL.ViewModel;
+using System.Collections.Generic;
 
 namespace ZakusochnayaView
 {
     public partial class FormSkladsLoad : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly IOtchetService service;
-        public FormSkladsLoad(IOtchetService service)
+        public FormSkladsLoad()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void FormSkladsLoad_Load(object sender, EventArgs e)
         {
             try
             {
-                var dict = service.GetStocksLoad();
+                var dict = APIClient.GetRequest<List<SkladsLoadViewModel>>("api/Otchet/GetSkladsLoad");
                 if (dict != null)
                 {
                     dataGridView.Rows.Clear();
@@ -29,11 +25,9 @@ namespace ZakusochnayaView
                         dataGridView.Rows.Add(new object[] { elem.SkladName, "", "" });
                         foreach (var listElem in elem.Elements)
                         {
-                            dataGridView.Rows.Add(new object[] { "", listElem.Item1,
-listElem.Item2 });
+                            dataGridView.Rows.Add(new object[] { "", listElem.Item1, listElem.Item2 });
                         }
-                        dataGridView.Rows.Add(new object[] { "Итого", "", elem.FullCount
-});
+                        dataGridView.Rows.Add(new object[] { "Итого", "", elem.FullCount });
                         dataGridView.Rows.Add(new object[] { });
                     }
                 }
@@ -55,7 +49,7 @@ listElem.Item2 });
             {
                 try
                 {
-                    service.SaveStocksLoad(new OtchetBindingModel
+                    APIClient.PostRequest< OtchetBindingModel, bool>("api/Otchet/SaveSkladsLoad", new OtchetBindingModel
                     {
                         FileName = sfd.FileName
                     });

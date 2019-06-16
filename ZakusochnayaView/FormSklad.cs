@@ -1,28 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
-using ZakusochnayaServiceDAL;
 using ZakusochnayaServiceDAL.BindingModel;
-using ZakusochnayaServiceDAL.Interfaces;
 using ZakusochnayaServiceDAL.ViewModel;
-using ZakusochnayaServiceDAL.ViewModels;
 
 namespace ZakusochnayaView
 {
     public partial class FormSklad : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
-        private readonly ISkladService service;
         private int? id;
 
         private List<SkladElementViewModel> productComponents;
-        public FormSklad(ISkladService service)
+        public FormSklad()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void FormSklad_Load(object sender, EventArgs e)
         {
@@ -30,7 +22,7 @@ namespace ZakusochnayaView
             {
                 try
                 {
-                    SkladViewModel view = service.GetElement(id.Value);
+                    SkladViewModel view = APIClient.GetRequest<SkladViewModel>("api/Sklad/Get/" + id.Value);
                     if (view != null)
                     {
                         textBoxName.Text = view.SkladName;
@@ -83,7 +75,7 @@ namespace ZakusochnayaView
             {
                 if (id.HasValue)
                 {
-                    service.UpdElement(new SkladBindingModel
+                    APIClient.PostRequest<SkladBindingModel, bool>("api/Sklad/UpdElement", new SkladBindingModel
                     {
                         Id = id.Value,
                         SkladName = textBoxName.Text
@@ -91,7 +83,7 @@ namespace ZakusochnayaView
                 }
                 else
                 {
-                    service.AddElement(new SkladBindingModel
+                    APIClient.PostRequest<SkladBindingModel, bool>("api/Sklad/AddElement", new SkladBindingModel
                     {
                         SkladName = textBoxName.Text
                     });

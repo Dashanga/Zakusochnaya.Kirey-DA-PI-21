@@ -3,35 +3,28 @@ using ZakusochnayaServiceDAL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
 using ZakusochnayaServiceDAL.ViewModel;
-using ZakusochnayaServiceDAL.BindingModel;
-//using Unity.Attributes;
 
 namespace ZakusochnayaView
 {
     public partial class FormOutputElement : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
         public OutputElementViewModel Model {
             set { model = value; }
             get {
                 return model;
             }
         }
-        private readonly IElementService service;
         private OutputElementViewModel model;
-        public FormOutputElement(IElementService service)
+        public FormOutputElement()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void FormOutputElement_Load(object sender, EventArgs e)
         {
             try
             {
-                List<ElementViewModel> list = service.GetList();
+                List<ElementViewModel> list = APIClient.GetRequest<List<ElementViewModel>>("api/Element/GetList");
                 if (list != null)
                 {
                     comboBoxComponent.DisplayMember = "ElementName";

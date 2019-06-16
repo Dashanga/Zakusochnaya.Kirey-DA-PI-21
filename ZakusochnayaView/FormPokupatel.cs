@@ -1,24 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
-using Unity;
 using ZakusochnayaServiceDAL;
 using ZakusochnayaServiceDAL.ViewModel;
 using ZakusochnayaServiceDAL.BindingModel;
-//using Unity.Attributes;
 
 namespace ZakusochnayaView
 {
     public partial class FormPokupatel : Form
     {
-            [Dependency]
-            public new IUnityContainer Container { get; set; }
             public int Id { set { id = value; } }
-            private readonly IPokupatelService service;
             private int? id;
-            public FormPokupatel(IPokupatelService service)
+            public FormPokupatel()
             {
                 InitializeComponent();
-                this.service = service;
             }
             private void FormPokupatel_Load(object sender, EventArgs e)
             {
@@ -26,7 +20,7 @@ namespace ZakusochnayaView
                 {
                     try
                     {
-                        PokupatelViewModel view = service.GetElement(id.Value);
+                        PokupatelViewModel view = APIClient.GetRequest<PokupatelViewModel>("api/Pokupatel/Get/" + id.Value);
                         if (view != null)
                         {
                             textBoxFIO.Text = view.PokupatelFIO;
@@ -51,7 +45,7 @@ namespace ZakusochnayaView
                 {
                     if (id.HasValue)
                     {
-                        service.UpdElement(new PokupatelBindingModel
+                        APIClient.PostRequest<PokupatelBindingModel, bool>("api/Pokupatel/UpdElement", new PokupatelBindingModel
                         {
                             Id = id.Value,
                             PokupatelFIO = textBoxFIO.Text
@@ -59,7 +53,7 @@ namespace ZakusochnayaView
                     }
                     else
                     {
-                        service.AddElement(new PokupatelBindingModel
+                        APIClient.PostRequest<PokupatelBindingModel, bool>("api/Pokupatel/AddElement", new PokupatelBindingModel
                         {
                             PokupatelFIO = textBoxFIO.Text
                         });

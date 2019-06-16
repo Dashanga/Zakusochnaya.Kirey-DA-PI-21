@@ -4,33 +4,22 @@ using ZakusochnayaServiceDAL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
 using ZakusochnayaServiceDAL.ViewModel;
 using ZakusochnayaServiceDAL.BindingModel;
-using ZakusochnayaServiceDAL;
 
 namespace ZakusochnayaView
 {
     public partial class FormPutOnSklad : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly ISkladService serviceS;
-        private readonly IElementService serviceC;
-        private readonly IMainService serviceM;
-        public FormPutOnSklad(ISkladService serviceS, IElementService serviceC,
-        IMainService serviceM)
+        public FormPutOnSklad()
         {
             InitializeComponent();
-            this.serviceS = serviceS;
-            this.serviceC = serviceC;
-            this.serviceM = serviceM;
         }
         private void FormPutOnSklad_Load(object sender, EventArgs e)
         {
             try
             {
-                List<ElementViewModel> listC = serviceC.GetList();
+                List<ElementViewModel> listC = APIClient.GetRequest<List<ElementViewModel>>("api/Element/GetList");
                 if (listC != null)
                 {
                     comboBoxComponent.DisplayMember = "ElementName";
@@ -38,7 +27,7 @@ namespace ZakusochnayaView
                     comboBoxComponent.DataSource = listC;
                     comboBoxComponent.SelectedItem = null;
                 }
-                List<SkladViewModel> listS = serviceS.GetList();
+                List<SkladViewModel> listS = APIClient.GetRequest<List<SkladViewModel>>("api/Sklad/GetList");
                 if (listS != null)
                 {
                     comboBoxStock.DisplayMember = "SkladName";
@@ -75,7 +64,7 @@ namespace ZakusochnayaView
             }
             try
             {
-                serviceM.PutComponentOnStock(new SkladElementBindingModel
+                APIClient.PostRequest<SkladElementBindingModel, bool>("api/Main/PutComponentOnSklad", new SkladElementBindingModel
                 {
                     ElementId = Convert.ToInt32(comboBoxComponent.SelectedValue),
                     SkladId = Convert.ToInt32(comboBoxStock.SelectedValue),

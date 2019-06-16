@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Unity;
 using ZakusochnayaServiceDAL;
+using ZakusochnayaServiceDAL.BindingModel;
 using ZakusochnayaServiceDAL.ViewModel;
-//using Unity.Attributes;
 
 namespace ZakusochnayaView
 {
     public partial class FormPokupatels : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly IPokupatelService service;
-        public FormPokupatels(IPokupatelService service)
+        public FormPokupatels()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void FormPokupatels_Load(object sender, EventArgs e)
         {
@@ -26,13 +21,12 @@ namespace ZakusochnayaView
         {
             try
             {
-                List<PokupatelViewModel> list = service.GetList();
+                List<PokupatelViewModel> list = APIClient.GetRequest<List<PokupatelViewModel>>("api/Pokupatel/GetList");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].AutoSizeMode =
-                    DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)
@@ -43,7 +37,7 @@ namespace ZakusochnayaView
         }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormPokupatel>();
+            var form = new FormPokupatel();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
@@ -53,7 +47,7 @@ namespace ZakusochnayaView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<FormPokupatel>();
+                var form = new FormPokupatel();
                 form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -73,7 +67,10 @@ namespace ZakusochnayaView
                     Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        service.DelElement(id);
+                        APIClient.PostRequest<PokupatelBindingModel, bool>("api/Pokupatel/DelElement", new PokupatelBindingModel
+                        {
+                            Id = id
+                        });
                     }
                     catch (Exception ex)
                     {

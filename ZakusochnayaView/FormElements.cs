@@ -4,10 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Unity;
+using ZakusochnayaServiceDAL.BindingModel;
 using ZakusochnayaServiceDAL.Interfaces;
 using ZakusochnayaServiceDAL.ViewModel;
 
@@ -15,13 +13,9 @@ namespace ZakusochnayaView
 {
     public partial class FormElements : Form
     {
-        [Dependency]
-        public new IUnityContainer Container { get; set; }
-        private readonly IElementService service;
-        public FormElements(IElementService service)
+        public FormElements()
         {
             InitializeComponent();
-            this.service = service;
         }
         private void FormElements_Load(object sender, EventArgs e)
         {
@@ -31,7 +25,7 @@ namespace ZakusochnayaView
         {
             try
             {
-                List<ElementViewModel> list = service.GetList();
+                List<ElementViewModel> list = APIClient.GetRequest<List<ElementViewModel>>("api/Element/GetList");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -48,7 +42,7 @@ namespace ZakusochnayaView
         }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormElement>();
+            var form = new FormElement();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
@@ -59,7 +53,7 @@ namespace ZakusochnayaView
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
-                var form = Container.Resolve<FormElement>();
+                var form = new FormElement();
                 form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -75,11 +69,13 @@ namespace ZakusochnayaView
                 if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    int id =
-                    Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                    int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        service.DelElement(id);
+                        APIClient.PostRequest<ElementBindingModel, bool>("api/Element/DelElement", new ElementBindingModel
+                        {
+                            Id = id
+                        });
                     }
                     catch (Exception ex)
                     {
