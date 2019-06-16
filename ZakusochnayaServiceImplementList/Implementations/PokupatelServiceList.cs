@@ -5,6 +5,7 @@ using ZakusochnayaServiceDAL.ViewModel;
 using System;
 using System.Collections.Generic;
 using ZakusochnayaServiceDAL;
+using System.Linq;
 
 namespace ZakusochnayaServiceImplementList.Implementations
 {
@@ -17,46 +18,37 @@ namespace ZakusochnayaServiceImplementList.Implementations
         }
         public List<PokupatelViewModel> GetList()
         {
-            List<PokupatelViewModel> result = new List<PokupatelViewModel>();
-            for (int i = 0; i < source.Pokupatels.Count; ++i)
+            List<PokupatelViewModel> result = source.Pokupatels.Select(rec => new
+PokupatelViewModel
             {
-                result.Add(new PokupatelViewModel
-                {
-                    Id = source.Pokupatels[i].Id,
-                    PokupatelFIO = source.Pokupatels[i].PokupatelFIO
-                });
-            }
+                Id = rec.Id,
+                PokupatelFIO = rec.PokupatelFIO
+            })
+.ToList();
             return result;
         }
         public PokupatelViewModel GetElement(int id)
         {
-            for (int i = 0; i < source.Pokupatels.Count; ++i)
+            Pokupatel element = source.Pokupatels.FirstOrDefault(rec => rec.Id == id);
+            if (element != null)
             {
-                if (source.Pokupatels[i].Id == id)
+                return new PokupatelViewModel
                 {
-                    return new PokupatelViewModel
-                    {
-                        Id = source.Pokupatels[i].Id,
-                        PokupatelFIO = source.Pokupatels[i].PokupatelFIO
-                    };
-                }
+                    Id = element.Id,
+                    PokupatelFIO = element.PokupatelFIO
+                };
             }
             throw new Exception("Элемент не найден");
         }
         public void AddElement(PokupatelBindingModel model)
         {
-            int maxId = 0;
-            for (int i = 0; i < source.Pokupatels.Count; ++i)
+            Pokupatel element = source.Pokupatels.FirstOrDefault(rec => rec.PokupatelFIO ==
+ model.PokupatelFIO);
+            if (element != null)
             {
-                if (source.Pokupatels[i].Id > maxId)
-                {
-                    maxId = source.Pokupatels[i].Id;
-                }
-                if (source.Pokupatels[i].PokupatelFIO == model.PokupatelFIO)
-                {
-                    throw new Exception("Уже есть клиент с таким ФИО");
-                }
+                throw new Exception("Уже есть клиент с таким ФИО");
             }
+            int maxId = source.Pokupatels.Count > 0 ? source.Pokupatels.Max(rec => rec.Id) : 0;
             source.Pokupatels.Add(new Pokupatel
             {
                 Id = maxId + 1,
@@ -65,36 +57,30 @@ namespace ZakusochnayaServiceImplementList.Implementations
         }
         public void UpdElement(PokupatelBindingModel model)
         {
-            int index = -1;
-            for (int i = 0; i < source.Pokupatels.Count; ++i)
+            Pokupatel element = source.Pokupatels.FirstOrDefault(rec => rec.PokupatelFIO ==
+ model.PokupatelFIO && rec.Id != model.Id);
+            if (element != null)
             {
-                if (source.Pokupatels[i].Id == model.Id)
-                {
-                    index = i;
-                }
-                if (source.Pokupatels[i].PokupatelFIO == model.PokupatelFIO &&
-                source.Pokupatels[i].Id != model.Id)
-                {
-                    throw new Exception("Уже есть клиент с таким ФИО");
-                }
+                throw new Exception("Уже есть клиент с таким ФИО");
             }
-            if (index == -1)
+            element = source.Pokupatels.FirstOrDefault(rec => rec.Id == model.Id);
+            if (element == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            source.Pokupatels[index].PokupatelFIO = model.PokupatelFIO;
+            element.PokupatelFIO = model.PokupatelFIO;
         }
         public void DelElement(int id)
         {
-            for (int i = 0; i < source.Pokupatels.Count; ++i)
+            Pokupatel element = source.Pokupatels.FirstOrDefault(rec => rec.Id == id);
+            if (element != null)
             {
-                if (source.Pokupatels[i].Id == id)
-                {
-                    source.Pokupatels.RemoveAt(i);
-                    return;
-                }
+                source.Pokupatels.Remove(element);
             }
-            throw new Exception("Элемент не найден");
+            else
+            {
+                throw new Exception("Элемент не найден");
+            }
         }
     }
 }

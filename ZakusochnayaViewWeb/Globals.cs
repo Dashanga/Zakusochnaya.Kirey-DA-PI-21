@@ -10,5 +10,6 @@ namespace ZakusochnayaViewWeb
         public static IElementService ElementService { get; } = new ElementServiceList();
         public static IOutputService OutputService { get; } = new OutputServiceList();
         public static IMainService MainService { get; } = new MainServiceList();
+        public static ISkladService SkladService { get; } = new SkladServiceList();
     }
 }

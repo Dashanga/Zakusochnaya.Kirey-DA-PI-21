@@ -26,6 +26,8 @@ namespace ZakusochnayaView
             var currentContainer = new UnityContainer();
             currentContainer.RegisterType<IPokupatelService, PokupatelServiceList>(new
             HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ISkladService, SkladServiceList>(new
+            HierarchicalLifetimeManager());
             currentContainer.RegisterType<IElementService, ElementServiceList>(new
             HierarchicalLifetimeManager());
             currentContainer.RegisterType<IOutputService, OutputServiceList>(new

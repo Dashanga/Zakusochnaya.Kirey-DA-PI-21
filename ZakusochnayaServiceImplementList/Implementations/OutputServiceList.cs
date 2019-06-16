@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using ZakusochnayaServiceDAL.ViewModels;
 using ZakusochnayaServiceDAL.BindingModels;
+using System.Linq;
 
 namespace ZakusochnayaServiceImplementList.Implementations
 {
@@ -16,104 +17,64 @@ namespace ZakusochnayaServiceImplementList.Implementations
         }
         public List<OutputViewModel> GetList()
         {
-            List<OutputViewModel> result = new List<OutputViewModel>();
-            for (int i = 0; i < source.Outputs.Count; ++i)
-            {
-                // требуется дополнительно получить список компонентов для изделия и их количество
-            List<OutputElementViewModel> outputElements = new
-            List<OutputElementViewModel>();
-                for (int j = 0; j < source.OutputElements.Count; ++j)
+            List<OutputViewModel> result = source.Outputs
+                .Select(rec => new OutputViewModel
                 {
-                    if (source.OutputElements[j].OutputId == source.Outputs[i].Id)
+                    Id = rec.Id,
+                    OutputName = rec.OutputName,
+                    Cost = rec.Cost,
+                    OutputElements = source.OutputElements
+                    .Where(recPC => recPC.OutputId == rec.Id)
+                    .Select(recPC => new OutputElementViewModel
                     {
-                        string elementName = string.Empty;
-                        for (int k = 0; k < source.Elements.Count; ++k)
-                        {
-                            if (source.OutputElements[j].ElementId ==
-                            source.Elements[k].Id)
-                            {
-                                elementName = source.Elements[k].ElementName;
-                                break;
-                            }
-                        }
-                        outputElements.Add(new OutputElementViewModel
-                        {
-                            Id = source.OutputElements[j].Id,
-                            OutputId = source.OutputElements[j].OutputId,
-                            ElementId = source.OutputElements[j].ElementId,
-                            ElementName = elementName,
-                            Number = source.OutputElements[j].Number
-                        });
-                    }
-                }
-                result.Add(new OutputViewModel
-                {
-                    Id = source.Outputs[i].Id,
-                    OutputName = source.Outputs[i].OutputName,
-                    Cost = source.Outputs[i].Cost,
-                    OutputElements = outputElements
-                });
-            }
+                        Id = recPC.Id,
+                        OutputId = recPC.OutputId,
+                        ElementId = recPC.ElementId,
+                        ElementName = source.Elements.FirstOrDefault(recC =>
+                        recC.Id == recPC.ElementId)?.ElementName,
+                        Number = recPC.Number
+                    })
+                    .ToList()
+                })
+                .ToList();
             return result;
         }
         public OutputViewModel GetElement(int id)
         {
-            for (int i = 0; i < source.Outputs.Count; ++i)
+            Output element = source.Outputs.FirstOrDefault(rec => rec.Id == id);
+            if (element != null)
             {
-                // требуется дополнительно получить список компонентов для изделия и их количество
-            List<OutputElementViewModel> outputElements = new
-            List<OutputElementViewModel>();
-                for (int j = 0; j < source.OutputElements.Count; ++j)
+                return new OutputViewModel
                 {
-                    if (source.OutputElements[j].OutputId == source.Outputs[i].Id)
-                    {
-                        string elementName = string.Empty;
-                        for (int k = 0; k < source.Elements.Count; ++k)
+                    Id = element.Id,
+                    OutputName = element.OutputName,
+                    Cost = element.Cost,
+                    OutputElements = source.OutputElements
+                        .Where(recPC => recPC.OutputId == element.Id)
+                        .Select(recPC => new OutputElementViewModel
                         {
-                            if (source.OutputElements[j].ElementId ==
-                            source.Elements[k].Id)
-                            {
-                                elementName = source.Elements[k].ElementName;
-                                break;
-                            }
-                        }
-                        outputElements.Add(new OutputElementViewModel
-                        {
-                            Id = source.OutputElements[j].Id,
-                            OutputId = source.OutputElements[j].OutputId,
-                            ElementId = source.OutputElements[j].ElementId,
-                            ElementName = elementName,
-                            Number = source.OutputElements[j].Number
-                        });
-                    }
-                }
-                if (source.Outputs[i].Id == id)
-                {
-                    return new OutputViewModel
-                    {
-                        Id = source.Outputs[i].Id,
-                        OutputName = source.Outputs[i].OutputName,
-                        Cost = source.Outputs[i].Cost,
-                        OutputElements = outputElements
-                    };
-                }
+                            Id = recPC.Id,
+                            OutputId = recPC.OutputId,
+                            ElementId = recPC.ElementId,
+                            ElementName = source.Elements.FirstOrDefault(recC =>
+    recC.Id == recPC.ElementId)?.ElementName,
+                            Number = recPC.Number
+                        })
+                        .ToList()
+                };
             }
             throw new Exception("Элемент не найден");
         }
         public void AddElement(OutputBindingModel model)
         {
-            int maxId = 0;
-            for (int i = 0; i < source.Outputs.Count; ++i)
+            Output element = source.Outputs.FirstOrDefault(rec => rec.OutputName ==
+            model.OutputName);
+            if (element != null)
             {
-                if (source.Outputs[i].Id > maxId)
-                {
-                    maxId = source.Outputs[i].Id;
-                }
-                if (source.Outputs[i].OutputName == model.OutputName)
-                {
-                    throw new Exception("Уже есть продукт с таким названием");
-                }
+                throw new Exception("Уже есть изделие с таким названием");
             }
+            int maxId = source.Outputs.Count > 0 ? source.Outputs.Max(rec => rec.Id) :
+            0;
             source.Outputs.Add(new Output
             {
                 Id = maxId + 1,
@@ -121,146 +82,99 @@ namespace ZakusochnayaServiceImplementList.Implementations
                 Cost = model.Cost
             });
             // компоненты для изделия
-            int maxPCId = 0;
-            for (int i = 0; i < source.OutputElements.Count; ++i)
-            {
-                if (source.OutputElements[i].Id > maxPCId)
-                {
-                    maxPCId = source.OutputElements[i].Id;
-                }
-            }
+            int maxPCId = source.OutputElements.Count > 0 ?
+            source.OutputElements.Max(rec => rec.Id) : 0;
             // убираем дубли по компонентам
-            for (int i = 0; i < model.OutputElements.Count; ++i)
+            var groupElements = model.OutputElements
+            .GroupBy(rec => rec.ElementId)
+            .Select(rec => new
             {
-                for (int j = 1; j < model.OutputElements.Count; ++j)
-                {
-                    if (model.OutputElements[i].ElementId ==
-                    model.OutputElements[j].ElementId)
-                    {
-                        model.OutputElements[i].Number +=
-                        model.OutputElements[j].Number;
-                        model.OutputElements.RemoveAt(j--);
-                    }
-                }
-            }
+                ElementId = rec.Key,
+                Number = rec.Sum(r => r.Number)
+            });
             // добавляем компоненты
-            for (int i = 0; i < model.OutputElements.Count; ++i)
+            foreach (var groupElement in groupElements)
             {
                 source.OutputElements.Add(new OutputElement
                 {
                     Id = ++maxPCId,
                     OutputId = maxId + 1,
-                    ElementId = model.OutputElements[i].ElementId,
-                    Number = model.OutputElements[i].Number
+                    ElementId = groupElement.ElementId,
+                    Number = groupElement.Number
                 });
             }
         }
         public void UpdElement(OutputBindingModel model)
         {
-            int index = -1;
-            for (int i = 0; i < source.Outputs.Count; ++i)
+            Output element = source.Outputs.FirstOrDefault(rec => rec.OutputName ==
+ model.OutputName && rec.Id != model.Id);
+            if (element != null)
             {
-                if (source.Outputs[i].Id == model.Id)
-                {
-                    index = i;
-                }
-                if (source.Outputs[i].OutputName == model.OutputName &&
-                source.Outputs[i].Id != model.Id)
-                {
-                    throw new Exception("Уже есть продукт с таким названием");
-                }
+                throw new Exception("Уже есть изделие с таким названием");
             }
-            if (index == -1)
+            element = source.Outputs.FirstOrDefault(rec => rec.Id == model.Id);
+            if (element == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            source.Outputs[index].OutputName = model.OutputName;
-            source.Outputs[index].Cost = model.Cost;
-            int maxPCId = 0;
-            for (int i = 0; i < source.OutputElements.Count; ++i)
-            {
-                if (source.OutputElements[i].Id > maxPCId)
-                {
-                    maxPCId = source.OutputElements[i].Id;
-                }
-            }
+            element.OutputName = model.OutputName;
+            element.Cost = model.Cost;
+            int maxPCId = source.OutputElements.Count > 0 ?
+            source.OutputElements.Max(rec => rec.Id) : 0;
             // обновляем существуюущие компоненты
-            for (int i = 0; i < source.OutputElements.Count; ++i)
+            var compIds = model.OutputElements.Select(rec =>
+            rec.ElementId).Distinct();
+            var updateElements = source.OutputElements.Where(rec => rec.OutputId ==
+            model.Id && compIds.Contains(rec.ElementId));
+            foreach (var updateElement in updateElements)
             {
-                if (source.OutputElements[i].OutputId == model.Id)
-                {
-                    bool flag = true;
-                    for (int j = 0; j < model.OutputElements.Count; ++j)
-                    {
-                        // если встретили, то изменяем количество
-                        if (source.OutputElements[i].Id ==
-                        model.OutputElements[j].Id)
-                        {
-                            source.OutputElements[i].Number =
-                            model.OutputElements[j].Number;
-                            flag = false;
-                            break;
-                        }
-                    }
-                    // если не встретили, то удаляем
-                    if (flag)
-                    {
-                        source.OutputElements.RemoveAt(i--);
-                    }
-                }
+                updateElement.Number = model.OutputElements.FirstOrDefault(rec =>
+                rec.Id == updateElement.Id).Number;
             }
+            source.OutputElements.RemoveAll(rec => rec.OutputId == model.Id &&
+            !compIds.Contains(rec.ElementId));
             // новые записи
-            for (int i = 0; i < model.OutputElements.Count; ++i)
+            var groupElements = model.OutputElements
+            .Where(rec => rec.Id == 0)
+            .GroupBy(rec => rec.ElementId)
+            .Select(rec => new
             {
-                if (model.OutputElements[i].Id == 0)
+                ElementId = rec.Key,
+                Number = rec.Sum(r => r.Number)
+            });
+            foreach (var groupElement in groupElements)
+            {
+                OutputElement elementPC = source.OutputElements.FirstOrDefault(rec
+                => rec.OutputId == model.Id && rec.ElementId == groupElement.ElementId);
+                if (elementPC != null)
                 {
-                    // ищем дубли
-                    for (int j = 0; j < source.OutputElements.Count; ++j)
+                    elementPC.Number += groupElement.Number;
+                }
+                else
+                {
+                    source.OutputElements.Add(new OutputElement
                     {
-                        if (source.OutputElements[j].OutputId == model.Id &&
-                        source.OutputElements[j].ElementId ==
-                        model.OutputElements[i].ElementId)
-                        {
-                            source.OutputElements[j].Number +=
-                            model.OutputElements[i].Number;
-                            model.OutputElements[i].Id =
-                            source.OutputElements[j].Id;
-                            break;
-                        }
-                    }
-                    // если не нашли дубли, то новая запись
-                    if (model.OutputElements[i].Id == 0)
-                    {
-                        source.OutputElements.Add(new OutputElement
-                        {
-                            Id = ++maxPCId,
-                            OutputId = model.Id,
-                            ElementId = model.OutputElements[i].ElementId,
-                            Number = model.OutputElements[i].Number
-                        });
-                    }
+                        Id = ++maxPCId,
+                        OutputId = model.Id,
+                        ElementId = groupElement.ElementId,
+                        Number = groupElement.Number
+                    });
                 }
             }
         }
         public void DelElement(int id)
         {
-            // удаяем записи по компонентам при удалении изделия
-            for (int i = 0; i < source.OutputElements.Count; ++i)
+            Output element = source.Outputs.FirstOrDefault(rec => rec.Id == id);
+            if (element != null)
             {
-                if (source.OutputElements[i].OutputId == id)
-                {
-                    source.OutputElements.RemoveAt(i--);
-                }
+                // удаяем записи по компонентам при удалении изделия
+                source.OutputElements.RemoveAll(rec => rec.OutputId == id);
+                source.Outputs.Remove(element);
             }
-            for (int i = 0; i < source.Outputs.Count; ++i)
+            else
             {
-                if (source.Outputs[i].Id == id)
-                {
-                    source.Outputs.RemoveAt(i);
-                    return;
-                }
+                throw new Exception("Элемент не найден");
             }
-            throw new Exception("Элемент не найден");
         }
     }
 }

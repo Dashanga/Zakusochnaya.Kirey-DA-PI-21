@@ -79,7 +79,7 @@ namespace ZakusochnayaViewWeb.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("Error", ex.Message);
+                ViewBag.ErrorMessage = ex.Message;
             }
 
 
