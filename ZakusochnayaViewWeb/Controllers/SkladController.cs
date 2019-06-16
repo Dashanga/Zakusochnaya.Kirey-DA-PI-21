@@ -28,6 +28,10 @@ namespace ZakusochnayaViewWeb.Controllers
             });
             return RedirectToAction("List");
         }
+        public ActionResult Details(int id)
+        {
+            return View(service.GetElement(id));
+        }
 
         public ActionResult Edit(int id)
         {

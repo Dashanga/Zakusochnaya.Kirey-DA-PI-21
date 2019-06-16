@@ -200,6 +200,7 @@
     <Content Include="Views\Sklad\Create.cshtml" />
     <Content Include="Views\Sklad\Edit.cshtml" />
     <Content Include="Views\Sklad\List.cshtml" />
+    <Content Include="Views\Sklad\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
