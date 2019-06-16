@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using ZakusochnayaServiceDAL.BindingModels;
 using ZakusochnayaServiceDAL.ViewModels;
+using System.Linq;
+using ZakusochnayaServiceDAL.BindingModel;
 
 namespace ZakusochnayaServiceImplementList.Implementations
 {
@@ -16,53 +18,28 @@ namespace ZakusochnayaServiceImplementList.Implementations
         }
         public List<ZakazViewModel> GetList()
         {
-            List<ZakazViewModel> result = new List<ZakazViewModel>();
-            for (int i = 0; i < source.Zakazs.Count; ++i)
-            {
-                string pokuptelFIO = string.Empty;
-                for (int j = 0; j < source.Pokupatels.Count; ++j)
+            List<ZakazViewModel> result = source.Zakazs
+                .Select(rec => new ZakazViewModel
                 {
-                    if (source.Pokupatels[j].Id == source.Zakazs[i].PokupatelId)
-                    {
-                        pokuptelFIO = source.Pokupatels[j].PokupatelFIO;
-                        break;
-                    }
-                }
-                string OutputName = string.Empty;
-                for (int j = 0; j < source.Outputs.Count; ++j)
-                {
-                    if (source.Outputs[j].Id == source.Zakazs[i].OutputId)
-                    {
-                        OutputName = source.Outputs[j].OutputName;
-                        break;
-                    }
-                }
-                result.Add(new ZakazViewModel
-                {
-                    Id = source.Zakazs[i].Id,
-                    PokupatelId = source.Zakazs[i].PokupatelId,
-                    PokupatelFIO = pokuptelFIO,
-                    OutputId = source.Zakazs[i].OutputId,
-                    OutputName = OutputName,
-                    Number = source.Zakazs[i].Number,
-                    Summa = source.Zakazs[i].Summa,
-                    DateCreate = source.Zakazs[i].DateCreate.ToLongDateString(),
-                    DateImplement = source.Zakazs[i].DateImplement?.ToLongDateString(),
-                    Status = source.Zakazs[i].Status.ToString()
-                });
-            }
+                    Id = rec.Id,
+                    PokupatelId = rec.PokupatelId,
+                    OutputId = rec.OutputId,
+                    DateCreate = rec.DateCreate.ToLongDateString(),
+                    DateImplement = rec.DateImplement?.ToLongDateString(),
+                    Status = rec.Status.ToString(),
+                    Number = rec.Number,
+                    Summa = rec.Summa,
+                    PokupatelFIO = source.Pokupatels.FirstOrDefault(recC => recC.Id ==
+    rec.PokupatelId)?.PokupatelFIO,
+                    OutputName = source.Outputs.FirstOrDefault(recP => recP.Id ==
+    rec.OutputId)?.OutputName,
+                })
+                .ToList();
             return result;
         }
         public void CreateOrder(ZakazBindingModel model)
         {
-            int maxId = 0;
-            for (int i = 0; i < source.Zakazs.Count; ++i)
-            {
-                if (source.Zakazs[i].Id > maxId)
-                {
-                    maxId = source.Pokupatels[i].Id;
-                }
-            }
+            int maxId = source.Zakazs.Count > 0 ? source.Zakazs.Max(rec => rec.Id) : 0;
             source.Zakazs.Add(new Zakaz
             {
                 Id = maxId + 1,
@@ -76,67 +53,103 @@ namespace ZakusochnayaServiceImplementList.Implementations
         }
         public void TakeOrderInWork(ZakazBindingModel model)
         {
-            int index = -1;
-            for (int i = 0; i < source.Zakazs.Count; ++i)
-            {
-                if (source.Zakazs[i].Id == model.Id)
-                {
-                    index = i;
-                    break;
-                }
-            }
-            if (index == -1)
+            Zakaz element = source.Zakazs.FirstOrDefault(rec => rec.Id == model.Id);
+            if (element == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            if (source.Zakazs[index].Status != ZakazStatus.Принят)
+            if (element.Status != ZakazStatus.Принят)
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
-            source.Zakazs[index].DateImplement = DateTime.Now;
-            source.Zakazs[index].Status = ZakazStatus.Выполняется;
+            // смотрим по количеству компонентов на складах
+            var outputElements = source.OutputElements.Where(rec => rec.OutputId
+            == element.OutputId);
+            foreach (var outputElement in outputElements)
+            {
+                int countOnStocks = source.SkladElements
+                .Where(rec => rec.ElementId ==
+                outputElement.ElementId)
+                .Sum(rec => rec.Number);
+                if (countOnStocks < outputElement.Number * element.Number)
+                {
+                    var elementName = source.Elements.FirstOrDefault(rec => rec.Id ==
+                    outputElement.ElementId);
+                    throw new Exception("Не достаточно компонента " +
+                    elementName?.ElementName + " требуется " + (outputElement.Number * element.Number) +
+                    ", в наличии " + countOnStocks);
+                }
+            }
+            // списываем
+            foreach (var outputElement in outputElements)
+            {
+                int countOnStocks = outputElement.Number * element.Number;
+                var skladElements = source.SkladElements.Where(rec => rec.ElementId
+                == outputElement.ElementId);
+                foreach (var skladElement in skladElements)
+                {
+                    // компонентов на одном слкаде может не хватать
+                    if (skladElement.Number >= countOnStocks)
+                    {
+                        skladElement.Number -= countOnStocks;
+                        break;
+                    }
+                    else
+                    {
+                        countOnStocks -= skladElement.Number;
+                        skladElement.Number = 0;
+                    }
+                }
+            }
+            element.DateImplement = DateTime.Now;
+            element.Status = ZakazStatus.Выполняется;
         }
         public void FinishOrder(ZakazBindingModel model)
         {
-            int index = -1;
-            for (int i = 0; i < source.Zakazs.Count; ++i)
-            {
-                if (source.Pokupatels[i].Id == model.Id)
-                {
-                    index = i;
-                    break;
-                }
-            }
-            if (index == -1)
+            Zakaz element = source.Zakazs.FirstOrDefault(rec => rec.Id == model.Id);
+            if (element == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            if (source.Zakazs[index].Status != ZakazStatus.Выполняется)
+            if (element.Status != ZakazStatus.Выполняется)
             {
                 throw new Exception("Заказ не в статусе \"Выполняется\"");
             }
-            source.Zakazs[index].Status = ZakazStatus.Готов;
+            element.Status = ZakazStatus.Готов;
         }
         public void PayOrder(ZakazBindingModel model)
         {
-            int index = -1;
-            for (int i = 0; i < source.Zakazs.Count; ++i)
-            {
-                if (source.Pokupatels[i].Id == model.Id)
-                {
-                    index = i;
-                    break;
-                }
-            }
-            if (index == -1)
+            Zakaz element = source.Zakazs.FirstOrDefault(rec => rec.Id == model.Id);
+            if (element == null)
             {
                 throw new Exception("Элемент не найден");
             }
-            if (source.Zakazs[index].Status != ZakazStatus.Готов)
+            if (element.Status != ZakazStatus.Готов)
             {
                 throw new Exception("Заказ не в статусе \"Готов\"");
             }
-            source.Zakazs[index].Status = ZakazStatus.Оплачен;
+            element.Status = ZakazStatus.Оплачен;
+        }
+        public void PutComponentOnStock(SkladElementBindingModel model)
+        {
+            SkladElement element = source.SkladElements.FirstOrDefault(rec =>
+            rec.SkladId == model.SkladId && rec.ElementId == model.ElementId);
+            if (element != null)
+            {
+                element.Number += model.Number;
+            }
+            else
+            {
+                int maxId = source.SkladElements.Count > 0 ?
+                source.SkladElements.Max(rec => rec.Id) : 0;
+                source.SkladElements.Add(new SkladElement
+                {
+                    Id = ++maxId,
+                    SkladId = model.SkladId,
+                    ElementId = model.ElementId,
+                    Number = model.Number
+                });
+            }
         }
     }
 }

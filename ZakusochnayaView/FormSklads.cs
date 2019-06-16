@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Unity;
+using ZakusochnayaServiceDAL;
 using ZakusochnayaServiceDAL.Interfaces;
-using ZakusochnayaServiceDAL.ViewModels;
+using ZakusochnayaServiceDAL.ViewModel;
 
 namespace ZakusochnayaView
 {
-    public partial class FormOutputs : Form
+    public partial class FormSklads : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
-        private readonly IOutputService service;
-        public FormOutputs(IOutputService service)
+        private readonly ISkladService service;
+        public FormSklads(ISkladService service)
         {
             InitializeComponent();
             this.service = service;
         }
-        private void FormOutputs_Load(object sender, EventArgs e)
+        private void FormSklads_Load(object sender, EventArgs e)
         {
             LoadData();
         }
@@ -25,7 +26,7 @@ namespace ZakusochnayaView
         {
             try
             {
-                List<OutputViewModel> list = service.GetList();
+                List<SkladViewModel> list = service.GetList();
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -40,26 +41,12 @@ namespace ZakusochnayaView
                 MessageBoxIcon.Error);
             }
         }
-
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormOutput>();
+            var form = Container.Resolve<FormSklad>();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
-            }
-        }
-
-        private void buttonUpd_Click(object sender, EventArgs e)
-        {
-            if (dataGridView.SelectedRows.Count == 1)
-            {
-                var form = Container.Resolve<FormOutput>();
-                form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    LoadData();
-                }
             }
         }
 
@@ -89,6 +76,19 @@ namespace ZakusochnayaView
         private void buttonRef_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void buttonUpd_Click_1(object sender, EventArgs e)
+        {
+            if (dataGridView.SelectedRows.Count == 1)
+            {
+                var form = Container.Resolve<FormSklad>();
+                form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    LoadData();
+                }
+            }
         }
     }
 }

@@ -116,6 +116,24 @@
     <Compile Include="FormOutputs.Designer.cs">
       <DependentUpon>FormOutputs.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormPutOnSklad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPutOnSklad.Designer.cs">
+      <DependentUpon>FormPutOnSklad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSklad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSklad.Designer.cs">
+      <DependentUpon>FormSklad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSklads.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSklads.Designer.cs">
+      <DependentUpon>FormSklads.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormPokupatel.resx">
@@ -144,6 +162,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormOutputs.resx">
       <DependentUpon>FormOutputs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPutOnSklad.resx">
+      <DependentUpon>FormPutOnSklad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSklad.resx">
+      <DependentUpon>FormSklad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSklads.resx">
+      <DependentUpon>FormSklads.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
