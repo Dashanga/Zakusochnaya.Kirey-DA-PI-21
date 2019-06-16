@@ -15,5 +15,6 @@ namespace ZakusochnayaModel
         public int OutputId { get; set; }
         public int ElementId { get; set; }
         public int Number { get; set; }
+        public virtual Element Element { get; set; }
     }
 }

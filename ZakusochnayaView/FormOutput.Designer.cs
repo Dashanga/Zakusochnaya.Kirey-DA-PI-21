@@ -159,7 +159,7 @@
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // FormProduct
+            // FormOutput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -171,7 +171,7 @@
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.labelPrice);
             this.Controls.Add(this.labelName);
-            this.Name = "FormProduct";
+            this.Name = "FormOutput";
             this.Text = "Продукт";
             this.Load += new System.EventHandler(this.FormOutput_Load);
             this.groupBox1.ResumeLayout(false);

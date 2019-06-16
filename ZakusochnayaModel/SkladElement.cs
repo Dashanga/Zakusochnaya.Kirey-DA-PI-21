@@ -12,5 +12,7 @@ namespace ZakusochnayaModel
         public int SkladId { get; set; }
         public int ElementId { get; set; }
         public int Number { get; set; }
+        public virtual Element Element { get; set; }
+        public virtual Sklad Sklad { get; set; }
     }
 }

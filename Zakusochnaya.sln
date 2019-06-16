@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZakusochnayaView", "Zakusoc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZakusochnayaViewWeb", "ZakusochnayaViewWeb\ZakusochnayaViewWeb.csproj", "{EEFA7384-E9E0-42CA-B648-397ED94A4504}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZakusochnayaServiceImplementDataBase", "ZakusochnayaServiceImplementDataBase\ZakusochnayaServiceImplementDataBase.csproj", "{05F48998-11AE-4476-A527-75F6E7E36D28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{EEFA7384-E9E0-42CA-B648-397ED94A4504}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEFA7384-E9E0-42CA-B648-397ED94A4504}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEFA7384-E9E0-42CA-B648-397ED94A4504}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05F48998-11AE-4476-A527-75F6E7E36D28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05F48998-11AE-4476-A527-75F6E7E36D28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05F48998-11AE-4476-A527-75F6E7E36D28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05F48998-11AE-4476-A527-75F6E7E36D28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

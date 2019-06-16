@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{602E31E3-B4CB-4B93-AF52-F5AD5662B6A2}</ProjectGuid>
+    <ProjectGuid>{05F48998-11AE-4476-A527-75F6E7E36D28}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ZakusochnayaModel</RootNamespace>
-    <AssemblyName>ZakusochnayaModel</AssemblyName>
+    <RootNamespace>ZakusochnayaServiceImplementDataBase</RootNamespace>
+    <AssemblyName>ZakusochnayaServiceImplementDataBase</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -49,19 +49,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pokupatel.cs" />
-    <Compile Include="Element.cs" />
-    <Compile Include="Output.cs" />
-    <Compile Include="OutputElement.cs" />
+    <Compile Include="Implementations\ElementServiceDB.cs" />
+    <Compile Include="Implementations\MainServiceDB.cs" />
+    <Compile Include="Implementations\OutputServiceDB.cs" />
+    <Compile Include="Implementations\SkladServiceDB.cs" />
+    <Compile Include="Migrations\201903101551493_FirstMigration.cs" />
+    <Compile Include="Migrations\201903101551493_FirstMigration.Designer.cs">
+      <DependentUpon>201903101551493_FirstMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Implementations\PokupatelServiceDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sklad.cs" />
-    <Compile Include="SkladElement.cs" />
-    <Compile Include="Zakaz.cs" />
-    <Compile Include="ZakazStatus.cs" />
+    <Compile Include="ZakusochnayaDbContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZakusochnayaModel\ZakusochnayaModel.csproj">
+      <Project>{602e31e3-b4cb-4b93-af52-f5ad5662b6a2}</Project>
+      <Name>ZakusochnayaModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZakusochnayaServiceDAL\ZakusochnayaServiceDAL.csproj">
+      <Project>{ed3030ba-8284-4b11-b33b-4507892afa5c}</Project>
+      <Name>ZakusochnayaServiceDAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201903101551493_FirstMigration.resx">
+      <DependentUpon>201903101551493_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
